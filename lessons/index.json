@@ -1,5 +1,6 @@
 {
   "lessons": [
-    {"day": 1, "week": 1, "file": "day-001.md", "title": "환경 구축(uv/venv) + 핵심 문법 JS 비교", "track": "Python 기초", "cs": "복잡도와 Python 객체 모델"}
+    {"day": 1, "week": 1, "file": "day-001.md", "title": "환경 구축(uv/venv) + 핵심 문법 JS 비교", "track": "Python 기초", "cs": "복잡도와 Python 객체 모델"},
+    {"day": 2, "week": 1, "file": "day-002.md", "title": "컬렉션: list/dict/set/tuple, 컴프리헨션", "track": "Python 기초", "cs": "배열·해시테이블 내부와 복잡도"}
   ]
 }
