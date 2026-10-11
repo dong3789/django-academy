@@ -1,0 +1,5 @@
+{
+  "lessons": [
+    {"day": 1, "week": 1, "file": "day-001.md", "title": "환경 구축(uv/venv) + 핵심 문법 JS 비교", "track": "Python 기초", "cs": "복잡도와 Python 객체 모델"}
+  ]
+}

@@ -1,0 +1,14 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Django Academy — Node.js 개발자를 위한 취업용 Django</title><link rel="stylesheet" href="style.css"></head><body>
+<header><a href="index.html">🐍 Django Academy</a></header><main>
+<h1>Node.js 개발자를 위한 Django + CS 취업 로드맵</h1>
+<p>Python 기초부터 Django/DRF 심화, 배포, 그리고 CS 기초(자료구조·OS·네트워크·DB·시스템 디자인)까지 12주 과정입니다.</p>
+<p id="prog"></p><div class="bar"><i id="pbar" style="width:0"></i></div><div id="road"></div></main>
+<script src="curriculum.js"></script><script>
+fetch('lessons/index.json').then(r=>r.json()).then(idx=>{
+ const have=new Set(idx.lessons.map(l=>l.day)); let n=0,done=0;
+ document.getElementById('road').innerHTML=CURRICULUM.map(w=>`<div class="week"><h3>${w.w}주차 · ${w.t}</h3><div class="cs">CS 트랙: ${w.cs}</div><ol start="${(w.w-1)*5+1}">`+
+ w.days.map(d=>{n++;const id=String(n).padStart(3,'0');const ok=localStorage.getItem('done-'+id)==='1';if(ok)done++;
+  return have.has(n)?`<li class="${ok?'done':''}"><a href="lesson.html?day=${n}">Day ${n}: ${d}</a>${ok?' ✅':''}</li>`:`<li class="pending">Day ${n}: ${d} (준비 중)</li>`}).join('')+`</ol></div>`).join('');
+ document.getElementById('prog').textContent=`진행률: ${done}/${n}일`;document.getElementById('pbar').style.width=(done/n*100)+'%';});
+</script></body></html>
