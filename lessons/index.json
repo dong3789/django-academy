@@ -23,6 +23,14 @@
       "title": "함수·스코프·클로저, *args/**kwargs",
       "track": "Python 기초",
       "cs": "콜 스택·활성화 레코드와 클로저"
+    },
+    {
+      "day": 4,
+      "week": 1,
+      "file": "day-004.md",
+      "title": "클래스·던더 메서드·데이터클래스",
+      "track": "Python 기초",
+      "cs": "속성 탐색·__dict__ vs __slots__·C3 MRO"
     }
   ]
 }
