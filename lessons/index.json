@@ -31,6 +31,14 @@
       "title": "클래스·던더 메서드·데이터클래스",
       "track": "Python 기초",
       "cs": "속성 탐색·__dict__ vs __slots__·C3 MRO"
+    },
+    {
+      "day": 5,
+      "week": 1,
+      "file": "day-005.md",
+      "title": "모듈/패키지·예외·파일 I/O + CS: 해시테이블 내부",
+      "track": "Python 기초",
+      "cs": "해시테이블 내부(충돌·부하율·amortized O(1))"
     }
   ]
 }
