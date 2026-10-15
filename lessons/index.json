@@ -39,6 +39,21 @@
       "title": "모듈/패키지·예외·파일 I/O + CS: 해시테이블 내부",
       "track": "Python 기초",
       "cs": "해시테이블 내부(충돌·부하율·amortized O(1))"
+    },
+    {
+      "day": 6,
+      "week": 2,
+      "file": "day-006.md",
+      "title": "이터레이터·제너레이터·yield from",
+      "track": "Python 심화",
+      "cs": "지연 평가·이터레이터 프로토콜"
+    }
+  ],
+  "quizzes": [
+    {
+      "week": 1,
+      "file": "quiz-week-01.md",
+      "title": "1주차 퀴즈 · Python 기초"
     }
   ]
 }

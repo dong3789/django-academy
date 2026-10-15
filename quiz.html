@@ -1,0 +1,23 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quiz — Django Academy</title><link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script></head><body>
+<header><a href="index.html">🐍 Django Academy</a></header><main>
+<div id="content">불러오는 중…</div>
+<div class="nav"><a href="index.html">목차</a></div></main>
+<script>
+const week=+new URLSearchParams(location.search).get('week')||1;
+const id=String(week).padStart(2,'0');
+const file='lessons/quiz-week-'+id+'.md';
+document.title=`Week ${week} Quiz — Django Academy`;
+fetch(file).then(r=>{
+ if(!r.ok)throw new Error('not found');
+ return r.text();
+}).then(md=>{
+ content.innerHTML=marked.parse(md);
+ document.querySelectorAll('pre code').forEach(e=>hljs.highlightElement(e));
+}).catch(()=>{
+ content.textContent='아직 공개되지 않은 퀴즈입니다. (week='+week+')';
+});
+</script></body></html>
