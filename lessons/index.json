@@ -4,9 +4,9 @@
       "day": 1,
       "week": 1,
       "file": "day-001.md",
-      "title": "환경 구축(uv/venv) + 핵심 문법 JS 비교",
-      "track": "Python 기초",
-      "cs": "복잡도와 Python 객체 모델"
+      "title": "Django 설치 + Goals 앱 뼈대 + Python 최소 문법",
+      "track": "Goals Kickoff",
+      "cs": "면접용: venv·객체 모델은 접기"
     },
     {
       "day": 2,

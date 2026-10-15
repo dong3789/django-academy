@@ -1,23 +1,105 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lesson — Django Academy</title><link rel="stylesheet" href="style.css?v=3">
+<title>Lesson — Django Academy</title><link rel="stylesheet" href="style.css?v=4">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css">
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<style>.mermaid{background:#161b22;border-radius:8px;padding:10px;margin:14px 0;overflow-x:auto;text-align:center}.mermaid svg{max-width:100%;height:auto}</style></head><body>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
+<style>
+.mermaid{background:#161b22;border-radius:8px;padding:10px;margin:14px 0;overflow-x:auto;text-align:center}
+.mermaid svg{max-width:100%;height:auto}
+.py-run{background:#0b0d12;border:1px solid var(--b);border-radius:8px;margin:14px 0;overflow:hidden}
+.py-run-bar{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--b);background:#161b22;flex-wrap:wrap}
+.py-run-bar .label{font-size:.85em;color:var(--mut);flex:1}
+.py-run-bar button{background:var(--acc);color:#0f1218;border:0;border-radius:6px;padding:8px 14px;font-weight:700;font-size:15px;cursor:pointer;min-height:40px;touch-action:manipulation}
+.py-run-bar button:disabled{opacity:.5;cursor:wait}
+.py-run textarea{display:block;width:100%;min-height:110px;margin:0;padding:12px 14px;border:0;background:#0b0d12;color:var(--fg);font-family:"JetBrains Mono",ui-monospace,monospace;font-size:14px;line-height:1.55;resize:vertical;-webkit-text-size-adjust:100%;box-sizing:border-box}
+.py-run-out{border-top:1px solid var(--b);padding:10px 14px;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:13px;white-space:pre-wrap;word-break:break-word;color:#9fefc0;min-height:1.5em;display:none}
+.py-run-out.err{color:#ff8a8a}
+.py-run-out.show{display:block}
+</style></head><body>
 <header><a href="index.html">🐍 Django Academy</a></header><main>
 <div id="content">불러오는 중…</div>
 <label style="display:block;margin:20px 0;font-size:1.1em"><input type="checkbox" id="done"> 이 레슨 완료</label>
 <div class="nav"><span id="prev"></span><a href="index.html">목차</a><span id="next"></span></div></main>
 <script>
 const day=+new URLSearchParams(location.search).get('day')||1, id=String(day).padStart(3,'0');
+let pyodideReady=null;
+function loadPyodideOnce(){
+  if(pyodideReady)return pyodideReady;
+  pyodideReady=loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.26.2/full/'})
+    .then(async py=>{
+      await py.runPythonAsync(`
+import sys
+from io import StringIO
+class _Cap:
+    def __init__(self): self._b=[]
+    def write(self,s): self._b.append(s)
+    def flush(self): pass
+    def getvalue(self): return ''.join(self._b)
+`);
+      return py;
+    });
+  return pyodideReady;
+}
+function enhancePythonRun(){
+  document.querySelectorAll('pre code.language-python-run').forEach(code=>{
+    const src=code.textContent.replace(/\n$/, '');
+    const wrap=document.createElement('div');
+    wrap.className='py-run';
+    wrap.innerHTML=`<div class="py-run-bar"><span class="label">▶ 브라우저에서 실행 (순수 Python)</span><button type="button">Run</button></div>`;
+    const ta=document.createElement('textarea');
+    ta.value=src;
+    ta.setAttribute('spellcheck','false');
+    ta.setAttribute('autocapitalize','off');
+    const out=document.createElement('div');
+    out.className='py-run-out';
+    const btn=wrap.querySelector('button');
+    wrap.appendChild(ta);
+    wrap.appendChild(out);
+    code.parentElement.replaceWith(wrap);
+    btn.onclick=async()=>{
+      btn.disabled=true; btn.textContent='로딩…';
+      out.classList.remove('show','err'); out.textContent='';
+      try{
+        const py=await loadPyodideOnce();
+        btn.textContent='실행 중…';
+        await py.runPythonAsync('_out=_Cap(); sys.stdout=_out; sys.stderr=_out');
+        try{
+          await py.runPythonAsync(ta.value);
+        }catch(e){
+          const msg=String(e.message||e);
+          const captured=py.runPython('_out.getvalue()');
+          out.textContent=(captured||'')+msg;
+          out.classList.add('show','err');
+          return;
+        }
+        const captured=py.runPython('_out.getvalue()');
+        out.textContent=captured || '(출력 없음)';
+        out.classList.add('show');
+      }catch(e){
+        out.textContent='Pyodide 로드 실패: '+(e.message||e);
+        out.classList.add('show','err');
+      }finally{
+        btn.disabled=false; btn.textContent='Run';
+      }
+    };
+  });
+}
 fetch('lessons/index.json').then(r=>r.json()).then(idx=>{
  const L=idx.lessons.sort((a,b)=>a.day-b.day), i=L.findIndex(l=>l.day===day), cur=L[i];
  if(!cur){content.textContent='아직 공개되지 않은 레슨입니다.';return}
  document.title=`Day ${day}: ${cur.title}`;
  if(L[i-1])prev.innerHTML=`<a href="?day=${L[i-1].day}">← Day ${L[i-1].day}</a>`;
  if(L[i+1])next.innerHTML=`<a href="?day=${L[i+1].day}">Day ${L[i+1].day} →</a>`;
- return fetch('lessons/'+cur.file).then(r=>r.text()).then(md=>{content.innerHTML=marked.parse(md);renderMermaid();document.querySelectorAll('pre code').forEach(e=>hljs.highlightElement(e))});
+ return fetch('lessons/'+cur.file).then(r=>r.text()).then(md=>{
+   content.innerHTML=marked.parse(md);
+   enhancePythonRun();
+   renderMermaid();
+   document.querySelectorAll('pre code').forEach(e=>{
+     if(!e.classList.contains('language-python-run')) hljs.highlightElement(e);
+   });
+ });
 });
 function renderMermaid(){
  if(!window.mermaid)return;
