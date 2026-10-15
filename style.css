@@ -16,3 +16,4 @@ table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}
 details>summary{padding:4px 0}details[open]>summary{margin-bottom:8px;border-bottom:1px solid var(--b);padding-bottom:8px}
 h3{margin-top:2em}
 @media (max-width:600px){main{padding:14px}body{font-size:16px}pre{font-size:14px;padding:10px 12px;margin-left:-4px;margin-right:-4px}h1{font-size:1.5em}h2{font-size:1.3em}h3{font-size:1.1em}}
+#content img{max-width:100%;height:auto;border-radius:8px;display:block;margin:12px auto}
