@@ -1,12 +1,12 @@
 {
   "field": "django",
   "goal": "Django·CS 취업 면접 통과 수준 (60일 커리큘럼)",
-  "updated": "2026-10-16",
-  "progress_pct": 10,
+  "updated": "2026-10-17",
+  "progress_pct": 12,
   "metrics": [
     {
       "name": "공개된 레슨",
-      "value": 6,
+      "value": 7,
       "unit": "/60일"
     }
   ],

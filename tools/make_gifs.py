@@ -181,5 +181,29 @@ def day6():
         fr.append(im)
     save("day6-generator.gif", fr, 1700)
 
-for f in (day1, day2_list, day2_hash, day3, day4, day5, day6):
-    f()
+# 8) Day7: PRG (Post → Redirect → Get)
+def day7():
+    steps = [("GET /new/", "빈 폼", ACC, "1. GET: 빈 폼을 받는다"),
+             ("POST (abc)", "폼 + 에러", WARN, "2. 잘못된 값: is_valid False → 폼 다시"),
+             ("POST (20)", "save() → 302", OK, "3. 올바른 값: 저장 후 redirect"),
+             ("GET /", "목록 화면", ACC, "4. 목록은 GET → 새로고침해도 안전")]
+    fr = []
+    for k, (req, res, col, cap) in enumerate(steps):
+        im, d = canvas("PRG: 저장 후 redirect", cap)
+        box(d, 20, 70, 130, 150, "브라우저")
+        box(d, 330, 70, 130, 150, "goal_create")
+        arrow(d, 155, 110, 325, 110, col)
+        d.text((165, 82), req, font=FS, fill=col)
+        arrow(d, 325, 180, 155, 180, col)
+        d.text((175, 186), res, font=FS, fill=col)
+        for i in range(4):
+            c = col if i == k else (DIM if i > k else FG)
+            d.ellipse((190 + i * 28, 236, 204 + i * 28, 250), fill=c)
+        fr.append(im)
+    save("day7-prg.gif", fr, 1800)
+
+import sys
+FNS = {f.__name__: f for f in
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7)}
+for name in (sys.argv[1:] or FNS):
+    FNS[name]()
