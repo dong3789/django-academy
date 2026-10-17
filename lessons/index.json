@@ -55,6 +55,14 @@
       "title": "Goal 모델 + 추가/수정 Form",
       "track": "Goals 앱",
       "cs": "면접용: 마이그레이션 상태·폼 검증 순서·PRG/CSRF"
+    },
+    {
+      "day": 8,
+      "week": 2,
+      "file": "day-008.md",
+      "title": "템플릿 상속·대시보드 UI",
+      "track": "Goals 앱",
+      "cs": "면접용: 템플릿 컴파일·autoescape/XSS·block.super"
     }
   ],
   "quizzes": [

@@ -202,8 +202,40 @@ def day7():
         fr.append(im)
     save("day7-prg.gif", fr, 1800)
 
+
+# 9) Day8: template extends → dashboard bar
+def day8():
+    fr = []
+    # frame 1: base only
+    im, d = canvas("템플릿 상속 extends", "1. base.html — 헤더 + 빈 block")
+    box(d, 40, 60, 400, 50, "header: Goals 대시보드", out=ACC)
+    box(d, 40, 120, 400, 90, "{% block content %}  (비어 있음)", out=DIM)
+    box(d, 40, 220, 400, 40, "footer", out=DIM)
+    fr.append(im)
+    # frame 2: child fills block
+    im, d = canvas("템플릿 상속 extends", "2. list.html — block에 목록 채움")
+    box(d, 40, 60, 400, 50, "header: Goals 대시보드", out=ACC)
+    box(d, 40, 120, 400, 90, "독서 20권 · 25%", out=OK, col=(20, 50, 30))
+    box(d, 40, 220, 400, 40, "footer", out=DIM)
+    fr.append(im)
+    # frame 3: progress bar empty-ish
+    im, d = canvas("pct → 진행률 바", "3. width: {{ g.pct }}%  (25%)")
+    box(d, 40, 70, 400, 44, "독서 20권  5/20 (25%)", out=ACC)
+    d.rounded_rectangle((40, 140, 440, 160), 5, fill=BOX, outline=DIM, width=2)
+    d.rounded_rectangle((40, 140, 40 + int(400 * 0.25), 160), 5, fill=ACC)
+    d.text((40, 180), "track 400px 중 100px 채움", font=FS, fill=DIM)
+    fr.append(im)
+    # frame 4: nearly full
+    im, d = canvas("pct → 진행률 바", "4. 같은 목표 · pct=90")
+    box(d, 40, 70, 400, 44, "독서 20권  18/20 (90%)", out=ACC)
+    d.rounded_rectangle((40, 140, 440, 160), 5, fill=BOX, outline=DIM, width=2)
+    d.rounded_rectangle((40, 140, 40 + int(400 * 0.90), 160), 5, fill=OK)
+    d.text((40, 180), "거의 완료 → 막대가 길게", font=FS, fill=OK)
+    fr.append(im)
+    save("day8-extends.gif", fr, 1700)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
