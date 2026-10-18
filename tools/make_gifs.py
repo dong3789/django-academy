@@ -234,8 +234,44 @@ def day8():
     fr.append(im)
     save("day8-extends.gif", fr, 1700)
 
+
+# 10) Day9: session cookie -> request.user -> owner filter
+def day9():
+    fr = []
+    im, d = canvas("로그인 · 세션", "1. 로그인 성공 → sessionid 쿠키")
+    box(d, 30, 90, 150, 50, "브라우저", out=ACC)
+    box(d, 300, 90, 150, 50, "Django", out=ACC)
+    arrow(d, 300, 125, 185, 125, OK)
+    box(d, 150, 170, 180, 40, "sessionid=abc", (20, 50, 30), OK)
+    fr.append(im)
+    im, d = canvas("로그인 · 세션", "2. 다음 요청: 쿠키 abc → User 찾기")
+    box(d, 30, 90, 150, 50, "GET /", out=ACC)
+    arrow(d, 185, 115, 295, 115)
+    box(d, 300, 90, 150, 50, "abc → dong", (20, 50, 30), OK)
+    d.text((300, 160), "request.user = dong", font=FS, fill=OK)
+    fr.append(im)
+    rows = [("1 독서", "dong"), ("7 걷기", "mom"), ("9 코딩", "dong")]
+    for step in (0, 1):
+        cap = ("3. Goal 전체 (owner 칸 있음)" if step == 0
+               else "4. filter(owner=dong) → 내 것만")
+        im, d = canvas("내 Goals만", cap)
+        for i, (t, o) in enumerate(rows):
+            mine = o == "dong"
+            if step == 1 and not mine:
+                box(d, 60, 60 + i * 56, 360, 44, t + "  · " + o + "  (숨김)", out=DIM, tc=DIM)
+            else:
+                col = (20, 50, 30) if step == 1 else BOX
+                box(d, 60, 60 + i * 56, 360, 44, t + "  · owner=" + o, col, OK if step else ACC)
+        fr.append(im)
+    im, d = canvas("남의 번호로 접근", "5. /7/edit/ → pk=7 AND owner=dong 없음")
+    box(d, 60, 80, 360, 50, "get(pk=7, owner=dong)", out=WARN)
+    arrow(d, 240, 135, 240, 175, WARN)
+    box(d, 160, 180, 160, 50, "404", (60, 30, 20), WARN, WARN)
+    fr.append(im)
+    save("day9-owner.gif", fr, 1800)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

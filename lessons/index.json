@@ -1,75 +1,83 @@
 {
-  "lessons": [
-    {
-      "day": 1,
-      "week": 1,
-      "file": "day-001.md",
-      "title": "Django 설치 + Goals 앱 뼈대 + Python 최소 문법",
-      "track": "Goals Kickoff",
-      "cs": "면접용: venv·객체 모델은 접기"
-    },
-    {
-      "day": 2,
-      "week": 1,
-      "file": "day-002.md",
-      "title": "컬렉션: list/dict/set/tuple, 컴프리헨션",
-      "track": "Python 기초",
-      "cs": "배열·해시테이블 내부와 복잡도"
-    },
-    {
-      "day": 3,
-      "week": 1,
-      "file": "day-003.md",
-      "title": "함수·스코프·클로저, *args/**kwargs",
-      "track": "Python 기초",
-      "cs": "콜 스택·활성화 레코드와 클로저"
-    },
-    {
-      "day": 4,
-      "week": 1,
-      "file": "day-004.md",
-      "title": "클래스·던더 메서드·데이터클래스",
-      "track": "Python 기초",
-      "cs": "속성 탐색·__dict__ vs __slots__·C3 MRO"
-    },
-    {
-      "day": 5,
-      "week": 1,
-      "file": "day-005.md",
-      "title": "모듈/패키지·예외·파일 I/O + CS: 해시테이블 내부",
-      "track": "Python 기초",
-      "cs": "해시테이블 내부(충돌·부하율·amortized O(1))"
-    },
-    {
-      "day": 6,
-      "week": 2,
-      "file": "day-006.md",
-      "title": "이터레이터·제너레이터·yield from",
-      "track": "Python 심화",
-      "cs": "지연 평가·이터레이터 프로토콜"
-    },
-    {
-      "day": 7,
-      "week": 2,
-      "file": "day-007.md",
-      "title": "Goal 모델 + 추가/수정 Form",
-      "track": "Goals 앱",
-      "cs": "면접용: 마이그레이션 상태·폼 검증 순서·PRG/CSRF"
-    },
-    {
-      "day": 8,
-      "week": 2,
-      "file": "day-008.md",
-      "title": "템플릿 상속·대시보드 UI",
-      "track": "Goals 앱",
-      "cs": "면접용: 템플릿 컴파일·autoescape/XSS·block.super"
-    }
-  ],
-  "quizzes": [
-    {
-      "week": 1,
-      "file": "quiz-week-01.md",
-      "title": "1주차 퀴즈 · Python 기초"
-    }
-  ]
+ "lessons": [
+  {
+   "day": 1,
+   "week": 1,
+   "file": "day-001.md",
+   "title": "Django 설치 + Goals 앱 뼈대 + Python 최소 문법",
+   "track": "Goals Kickoff",
+   "cs": "면접용: venv·객체 모델은 접기"
+  },
+  {
+   "day": 2,
+   "week": 1,
+   "file": "day-002.md",
+   "title": "컬렉션: list/dict/set/tuple, 컴프리헨션",
+   "track": "Python 기초",
+   "cs": "배열·해시테이블 내부와 복잡도"
+  },
+  {
+   "day": 3,
+   "week": 1,
+   "file": "day-003.md",
+   "title": "함수·스코프·클로저, *args/**kwargs",
+   "track": "Python 기초",
+   "cs": "콜 스택·활성화 레코드와 클로저"
+  },
+  {
+   "day": 4,
+   "week": 1,
+   "file": "day-004.md",
+   "title": "클래스·던더 메서드·데이터클래스",
+   "track": "Python 기초",
+   "cs": "속성 탐색·__dict__ vs __slots__·C3 MRO"
+  },
+  {
+   "day": 5,
+   "week": 1,
+   "file": "day-005.md",
+   "title": "모듈/패키지·예외·파일 I/O + CS: 해시테이블 내부",
+   "track": "Python 기초",
+   "cs": "해시테이블 내부(충돌·부하율·amortized O(1))"
+  },
+  {
+   "day": 6,
+   "week": 2,
+   "file": "day-006.md",
+   "title": "이터레이터·제너레이터·yield from",
+   "track": "Python 심화",
+   "cs": "지연 평가·이터레이터 프로토콜"
+  },
+  {
+   "day": 7,
+   "week": 2,
+   "file": "day-007.md",
+   "title": "Goal 모델 + 추가/수정 Form",
+   "track": "Goals 앱",
+   "cs": "면접용: 마이그레이션 상태·폼 검증 순서·PRG/CSRF"
+  },
+  {
+   "day": 8,
+   "week": 2,
+   "file": "day-008.md",
+   "title": "템플릿 상속·대시보드 UI",
+   "track": "Goals 앱",
+   "cs": "면접용: 템플릿 컴파일·autoescape/XSS·block.super"
+  },
+  {
+   "day": 9,
+   "week": 2,
+   "file": "day-009.md",
+   "title": "로그인: 내 Goals만 보기",
+   "track": "Goals 앱",
+   "cs": "면접용: 세션 인증·비밀번호 해시·IDOR"
+  }
+ ],
+ "quizzes": [
+  {
+   "week": 1,
+   "file": "quiz-week-01.md",
+   "title": "1주차 퀴즈 · Python 기초"
+  }
+ ]
 }
