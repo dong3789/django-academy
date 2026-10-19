@@ -71,6 +71,14 @@
    "title": "로그인: 내 Goals만 보기",
    "track": "Goals 앱",
    "cs": "면접용: 세션 인증·비밀번호 해시·IDOR"
+  },
+  {
+   "day": 10,
+   "week": 2,
+   "file": "day-010.md",
+   "title": "간단 배포 맛보기 + 1·2주 회고",
+   "track": "Goals 앱",
+   "cs": "면접용: WSGI·DEBUG/SECRET_KEY·프록시 뒤 CSRF"
   }
  ],
  "quizzes": [

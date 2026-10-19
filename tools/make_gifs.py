@@ -270,8 +270,42 @@ def day9():
     fr.append(im)
     save("day9-owner.gif", fr, 1800)
 
+
+# 11) Day10: runserver (1 lane) vs gunicorn (workers)
+def day10():
+    fr = []
+    reqs = ["요청1", "요청2", "요청3"]
+    for k in range(4):
+        cap = ["1. runserver: 코드 바뀌면 자동 재시작 (개발용)",
+               "2. 워커 관리·장애 복구 없음 → 운영엔 X",
+               "3. gunicorn: 워커 여러 개가 나눠 처리",
+               "4. 앞에 HTTPS 프록시 → gunicorn → Django"][k]
+        im, d = canvas("개발 서버 vs 운영 서버", cap)
+        if k < 2:
+            box(d, 300, 110, 150, 60, "runserver", out=WARN)
+            n = 1 if k == 0 else 3
+            for i in range(n):
+                box(d, 30 + i * 85, 115, 75, 50, reqs[i], out=ACC)
+            arrow(d, 30 + n * 85 - 5, 140, 295, 140, WARN)
+        elif k == 2:
+            for i in range(3):
+                box(d, 30, 60 + i * 62, 90, 46, reqs[i], out=ACC)
+                arrow(d, 125, 83 + i * 62, 285, 83 + i * 62, OK)
+                box(d, 290, 60 + i * 62, 160, 46, "워커 %d" % (i + 1),
+                    (20, 50, 30), OK)
+        else:
+            box(d, 14, 110, 100, 56, "브라우저", out=ACC)
+            arrow(d, 116, 138, 150, 138)
+            box(d, 152, 110, 110, 56, "HTTPS", out=ACC, f=FS)
+            arrow(d, 264, 138, 298, 138)
+            box(d, 300, 80, 166, 46, "gunicorn", (20, 50, 30), OK)
+            box(d, 300, 150, 166, 46, "Django 앱", out=ACC)
+            arrow(d, 383, 128, 383, 148, OK)
+        fr.append(im)
+    save("day10-deploy.gif", fr, 1800)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
