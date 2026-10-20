@@ -304,8 +304,38 @@ def day10():
         fr.append(im)
     save("day10-deploy.gif", fr, 1800)
 
+# 12) Day11: 요청 생명주기 (양파 미들웨어)
+def day11():
+    fr = []
+    steps = [
+        ("1. gunicorn이 HTTP를 받아 WSGI로 넘김", 0),
+        ("2. 미들웨어를 위에서 아래로 통과 (요청)", 1),
+        ("3. URLconf가 경로 → 뷰를 고름", 2),
+        ("4. 뷰가 ORM·템플릿으로 응답을 만듦", 3),
+        ("5. 응답은 미들웨어를 거꾸로 통과", 4),
+    ]
+    names = ["gunicorn (WSGI)", "Security · Session",
+             "Csrf · Auth", "urls.py", "views.goal_list"]
+    for cap, k in steps:
+        im, d = canvas("요청 하나의 여행", cap)
+        for i, n in enumerate(names):
+            y = 46 + i * 42
+            on = (i <= k) if k < 4 else (i < 3)
+            col = (20, 50, 30) if on else BOX
+            out = OK if on else DIM
+            if k == 4 and i >= 3:
+                col, out = (31, 58, 95), ACC
+            box(d, 90, y, 300, 34, n, col, out, f=FS)
+        if k < 4:
+            arrow(d, 60, 50, 60, 60 + k * 42 + 20, ACC)
+        else:
+            arrow(d, 420, 60 + 4 * 42, 420, 56, WARN)
+            d.text((396, 30), "응답", font=FS, fill=WARN)
+        fr.append(im)
+    save("day11-lifecycle.gif", fr, 1800)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

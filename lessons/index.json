@@ -79,6 +79,14 @@
    "title": "간단 배포 맛보기 + 1·2주 회고",
    "track": "Goals 앱",
    "cs": "면접용: WSGI·DEBUG/SECRET_KEY·프록시 뒤 CSRF"
+  },
+  {
+   "day": 11,
+   "week": 3,
+   "file": "day-011.md",
+   "title": "요청 생명주기·settings 정리",
+   "track": "Goals 앱",
+   "cs": "면접용: HTTP/TCP·미들웨어 순서·settings 로딩"
   }
  ],
  "quizzes": [
