@@ -334,8 +334,40 @@ def day11():
         fr.append(im)
     save("day11-lifecycle.gif", fr, 1800)
 
+# 13) Day12: FK(체크인) vs M2M(태그 + 중간 테이블)
+def day12():
+    fr = []
+    cap = ["1. Goal 하나 = 행 하나", "2. FK: 체크인 여러 개가 goal_id로 가리킴",
+           "3. M2M: 태그는 여러 Goal에 붙을 수 있음",
+           "4. Django가 중간 테이블(goal_tags)을 만듦"]
+    for k in range(4):
+        im, d = canvas("모델 관계", cap[k])
+        box(d, 170, 50, 140, 40, "Goal 1 · 독서", (20, 50, 30), OK, f=FS)
+        if k == 1:
+            for i, t in enumerate(["10/21 +2", "10/22 +1", "10/23 +3"]):
+                y = 120 + i * 42
+                box(d, 20, y, 170, 34, "CheckIn " + t, out=ACC, f=FS)
+                arrow(d, 190, y + 17, 240, 92, ACC)
+            d.text((260, 160), "goal_id = 1", font=FS, fill=ACC)
+        if k >= 2:
+            box(d, 330, 50, 140, 40, "Goal 2 · 걷기", (20, 50, 30), OK, f=FS)
+            tags = ["#건강", "#습관"]
+            for i, t in enumerate(tags):
+                box(d, 120 + i * 160, 190, 120, 36, t, out=WARN, f=FS)
+            if k == 2:
+                arrow(d, 220, 92, 180, 188, WARN)
+                arrow(d, 240, 92, 330, 188, WARN)
+                arrow(d, 400, 92, 350, 188, WARN)
+            else:
+                box(d, 120, 110, 280, 64,
+                    "goal_tags: (1,#습관) (2,#건강) (2,#습관)",
+                    (31, 58, 95), ACC, f=FS)
+                arrow(d, 260, 176, 260, 188, ACC)
+        fr.append(im)
+    save("day12-relations.gif", fr, 1900)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

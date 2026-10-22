@@ -87,6 +87,14 @@
    "title": "요청 생명주기·settings 정리",
    "track": "Goals 앱",
    "cs": "면접용: HTTP/TCP·미들웨어 순서·settings 로딩"
+  },
+  {
+   "day": 12,
+   "week": 3,
+   "file": "day-012.md",
+   "title": "모델 관계: 태그(M2M)·체크인(FK)",
+   "track": "Goals 앱",
+   "cs": "면접용: on_delete·중간 테이블·through·N+1"
   }
  ],
  "quizzes": [
@@ -94,6 +102,11 @@
    "week": 1,
    "file": "quiz-week-01.md",
    "title": "1주차 퀴즈 · Python 기초"
+  },
+  {
+   "week": 2,
+   "file": "quiz-week-02.md",
+   "title": "2주차 퀴즈 · Goals 앱 만들기 (Day 7~12)"
   }
  ]
 }
