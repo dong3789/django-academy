@@ -366,8 +366,36 @@ def day12():
         fr.append(im)
     save("day12-relations.gif", fr, 1900)
 
+# 14) Day13: 마이그레이션 그래프 · 충돌 · merge
+def day13():
+    fr = []
+    cap = ["1. 마이그레이션은 앞 파일을 가리키는 사슬",
+           "2. 나: 0005_checkin_note 추가",
+           "3. 동료도 0004 뒤에 0005_goal_color 추가",
+           "4. 잎이 2개 → migrate가 멈춤 (충돌)",
+           "5. makemigrations --merge 로 합침"]
+    for k in range(5):
+        im, d = canvas("마이그레이션 그래프", cap[k])
+        box(d, 20, 120, 90, 40, "0003", f=FS)
+        box(d, 130, 120, 90, 40, "0004", (20, 50, 30), OK, f=FS)
+        arrow(d, 110, 140, 128, 140, ACC)
+        if k >= 1:
+            box(d, 236, 60, 146, 40, "0005_checkin_note", out=ACC, f=FS)
+            arrow(d, 220, 132, 234, 82, ACC)
+        if k >= 2:
+            box(d, 236, 180, 146, 40, "0005_goal_color", out=WARN, f=FS)
+            arrow(d, 220, 148, 234, 198, WARN)
+        if k == 3:
+            d.text((392, 128), "잎 2개!", font=FS, fill=WARN)
+        if k == 4:
+            box(d, 388, 120, 86, 40, "0006_merge", (31, 58, 95), ACC, f=FS)
+            arrow(d, 382, 82, 420, 118, ACC)
+            arrow(d, 382, 198, 420, 162, ACC)
+        fr.append(im)
+    save("day13-merge.gif", fr, 1800)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

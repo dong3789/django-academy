@@ -95,6 +95,14 @@
    "title": "모델 관계: 태그(M2M)·체크인(FK)",
    "track": "Goals 앱",
    "cs": "면접용: on_delete·중간 테이블·through·N+1"
+  },
+  {
+   "day": 13,
+   "week": 3,
+   "file": "day-013.md",
+   "title": "마이그레이션 깊게: 데이터 옮기기·충돌 해결",
+   "track": "Goals 앱",
+   "cs": "면접용: 마이그레이션 그래프·expand/contract·--fake/squash"
   }
  ],
  "quizzes": [
