@@ -394,8 +394,35 @@ def day13():
         fr.append(im)
     save("day13-merge.gif", fr, 1800)
 
+# 15) Day14: aggregate vs annotate
+def day14():
+    fr = []
+    cap = ["1. 체크인 행들 (goal_id, amount)",
+           "2. annotate: Goal별로 묶어 행마다 합계 칸",
+           "3. aggregate: 전체를 dict 한 개로",
+           "4. 쿼리는 둘 다 1번 (N+1 없음)"]
+    rows = [("1", "+2"), ("1", "+3"), ("2", "+5")]
+    for k in range(4):
+        im, d = canvas("aggregate vs annotate", cap[k])
+        for i, (g, a) in enumerate(rows):
+            col = OK if g == "1" else WARN
+            box(d, 20, 60 + i * 44, 130, 36, "goal " + g + "  " + a,
+                out=col, f=FS)
+        if k in (1, 3):
+            box(d, 210, 70, 120, 36, "Goal 1 · 5", (20, 50, 30), OK, f=FS)
+            box(d, 210, 140, 120, 36, "Goal 2 · 5", (60, 40, 20), WARN, f=FS)
+            arrow(d, 150, 90, 206, 88, OK)
+            arrow(d, 150, 168, 206, 158, WARN)
+        if k in (2, 3):
+            box(d, 350, 105, 116, 40, "{s: 10}", (31, 58, 95), ACC, f=FS)
+            arrow(d, 150, 130, 346, 125, ACC)
+        if k == 3:
+            d.text((210, 200), "SQL 1번 · GROUP BY", font=FS, fill=ACC)
+        fr.append(im)
+    save("day14-annotate.gif", fr, 1800)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

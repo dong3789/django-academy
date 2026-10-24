@@ -103,6 +103,14 @@
    "title": "마이그레이션 깊게: 데이터 옮기기·충돌 해결",
    "track": "Goals 앱",
    "cs": "면접용: 마이그레이션 그래프·expand/contract·--fake/squash"
+  },
+  {
+   "day": 14,
+   "week": 3,
+   "file": "day-014.md",
+   "title": "ORM으로 통계: QuerySet·F/Q·annotate",
+   "track": "Goals 앱",
+   "cs": "면접용: lazy 평가·경쟁 조건·GROUP BY/HAVING·JOIN 부풀림"
   }
  ],
  "quizzes": [
