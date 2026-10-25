@@ -421,8 +421,28 @@ def day14():
         fr.append(im)
     save("day14-annotate.gif", fr, 1800)
 
+# 16) Day15: CBV 요청 흐름
+def day15():
+    fr = []
+    steps = [("GET /", "1. URL이 as_view()가 만든 함수를 부름"),
+             ("dispatch()", "2. dispatch: 메서드 보고 갈 곳 결정"),
+             ("get()", "3. GET이면 get() 실행"),
+             ("get_queryset()", "4. 내 것만: 여기를 오버라이드"),
+             ("get_context_data()", "5. 템플릿 변수 채우기"),
+             ("render", "6. goal_list.html 렌더 → 응답")]
+    for k in range(len(steps)):
+        im, d = canvas("ListView 안에서 일어나는 일", steps[k][1])
+        for i, (t, _) in enumerate(steps):
+            col = (31, 58, 95) if i == k else BOX
+            out = ACC if i == k else (OK if i < k else DIM)
+            x = 30 + (i % 2) * 220
+            y = 52 + (i // 2) * 66
+            box(d, x, y, 200, 44, t, col, out, f=FS)
+        fr.append(im)
+    save("day15-cbv-flow.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
