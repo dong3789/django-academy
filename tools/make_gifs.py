@@ -441,8 +441,43 @@ def day15():
         fr.append(im)
     save("day15-cbv-flow.gif", fr, 1600)
 
+def day16():
+    fr = []
+    steps = [(0, "1. 뷰가 자기 값만 줌: goals"),
+             (1, "2. 프로세서 1: user (auth)"),
+             (2, "3. 프로세서 2: week_checkins"),
+             (3, "4. 합쳐진 컨텍스트로 렌더"),
+             (4, "5. 어느 페이지든 헤더에 숫자")]
+    rows = [("goals = [...]", ACC), ("user = 동", OK),
+            ("week_checkins = 7", WARN)]
+    for k, cap in steps:
+        im, d = canvas("컨텍스트 프로세서가 하는 일", cap)
+        box(d, 20, 60, 130, 40, "goal_list 뷰", out=ACC, f=FS)
+        box(d, 20, 120, 130, 40, "auth 프로세서", out=OK, f=FS)
+        box(d, 20, 180, 130, 40, "week 프로세서", out=WARN, f=FS)
+        d.rounded_rectangle((180, 56, 330, 232), 8, fill=BOX,
+                            outline=DIM, width=2)
+        d.text((192, 62), "context", font=FS, fill=DIM)
+        for i in range(min(k + 1, 3)):
+            t, c = rows[i]
+            d.text((192, 92 + i * 40), t, font=FS, fill=c)
+            arrow(d, 152, 80 + i * 60, 178, 98 + i * 40, c)
+        if k >= 3:
+            arrow(d, 332, 144, 352, 144)
+            for j, pg in enumerate(["목록", "추가", "수정"]):
+                y = 64 + j * 58
+                out = WARN if k >= 4 else DIM
+                d.rounded_rectangle((352, y, 474, y + 48), 6,
+                                    fill=BOX, outline=out, width=2)
+                d.text((360, y + 4), pg + " 페이지", font=FS, fill=FG)
+                if k >= 4:
+                    d.text((360, y + 24), "이번 주 체크인 7", font=FS,
+                           fill=WARN)
+        fr.append(im)
+    save("day16-context.gif", fr, 1700)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

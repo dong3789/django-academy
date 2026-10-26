@@ -119,6 +119,14 @@
       "title": "URL 정리와 FBV vs CBV·제네릭 뷰",
       "track": "Goals 앱",
       "cs": "면접용: as_view·dispatch·Mixin 순서(MRO)·reverse_lazy"
+    },
+    {
+      "day": 16,
+      "week": 4,
+      "file": "day-016.md",
+      "title": "템플릿 심화: 커스텀 필터·태그와 컨텍스트 프로세서",
+      "track": "Goals 앱",
+      "cs": "면접용: 게으른 컨텍스트 값·mark_safe/format_html·DB 정규화(1NF~3NF)"
     }
   ],
   "quizzes": [
