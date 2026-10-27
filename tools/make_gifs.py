@@ -476,8 +476,38 @@ def day16():
         fr.append(im)
     save("day16-context.gif", fr, 1700)
 
+def day17():
+    fr = []
+    st = [("① to_python", '"20" → 20', ACC),
+          ("② validate·validators", "필수·최소값", ACC),
+          ("③ clean_<필드>", "마감일 ≥ 오늘", OK),
+          ("④ clean()", "done ≤ target", WARN),
+          ("⑤ 모델 full_clean", "unique·제약", (200, 120, 255))]
+    caps = ["1. 문자열을 타입으로 변환", "2. 기본 규칙 검사",
+            "3. 내가 쓴 필드별 검사", "4. 여러 필드를 함께 검사",
+            "5. ModelForm: 모델 규칙까지", "실패 칸은 cleaned_data에 없음"]
+    for k, cap in enumerate(caps):
+        im, d = canvas("is_valid() 검증 순서", cap)
+        for i, (t, sub, c) in enumerate(st):
+            y = 46 + i * 44
+            on = i <= k
+            box(d, 20, y, 220, 36, t, out=c if on else DIM,
+                tc=FG if on else DIM, f=FS)
+            if on:
+                d.text((256, y + 8), sub, font=FS, fill=c)
+            if i < 4:
+                arrow(d, 130, y + 36, 130, y + 44, c if i < k else DIM)
+        if k == 5:
+            d.rounded_rectangle((250, 130, 470, 220), 6, fill=BOX,
+                                outline=WARN, width=2)
+            d.text((260, 138), "target='abc' → ① 실패", font=FS, fill=WARN)
+            d.text((260, 164), "clean(): data.get('target')", font=FS, fill=FG)
+            d.text((260, 190), "→ None 이면 건너뛰기", font=FS, fill=OK)
+        fr.append(im)
+    save("day17-pipeline.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
