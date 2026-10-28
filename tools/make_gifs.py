@@ -506,8 +506,42 @@ def day17():
         fr.append(im)
     save("day17-pipeline.gif", fr, 1600)
 
+def day18():
+    fr = []
+    caps = ["1. 로그인 성공 → login(request, user)",
+            "2. 서버 DB에 세션 행 저장",
+            "3. 브라우저엔 열쇠(sessionid)만",
+            "4. 다음 요청: 쿠키로 세션 찾기",
+            "5. request.user 복원 (필요할 때)"]
+    for k, cap in enumerate(caps):
+        im, d = canvas("세션 로그인은 이렇게 돈다", cap)
+        on = lambda i: i <= k
+        box(d, 14, 60, 130, 44, "브라우저", out=ACC if on(0) else DIM, f=FS)
+        box(d, 330, 60, 136, 44, "Django", out=ACC if on(0) else DIM, f=FS)
+        box(d, 330, 170, 136, 44, "django_session", out=OK if on(1) else DIM,
+            tc=FG if on(1) else DIM, f=FS)
+        if k == 0:
+            arrow(d, 146, 74, 326, 74)
+            d.text((160, 48), "POST /login", font=FS, fill=ACC)
+        if on(1):
+            arrow(d, 398, 106, 398, 166, OK)
+            d.text((150, 138), "a1b2… → {_auth_user_id: 7}", font=FS,
+                   fill=OK if k == 1 else DIM)
+        if k >= 2:
+            arrow(d, 326, 92, 146, 92, WARN)
+            d.text((150, 112), "Set-Cookie: sessionid=a1b2…", font=FS,
+                   fill=WARN if k == 2 else DIM)
+        if k >= 3:
+            box(d, 14, 170, 130, 44, "쿠키 a1b2…", out=WARN, f=FS)
+            arrow(d, 146, 66, 326, 66, ACC)
+            d.text((160, 40), "GET / (쿠키 동봉)", font=FS, fill=ACC)
+        if k == 4:
+            d.text((180, 226), "request.user = User(id=7)", font=FS, fill=OK)
+        fr.append(im)
+    save("day18-session.gif", fr, 1700)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

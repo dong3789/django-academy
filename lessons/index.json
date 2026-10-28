@@ -135,6 +135,14 @@
       "title": "Forms 검증 심화: clean 순서·add_error·3겹 방어",
       "track": "Goals 앱",
       "cs": "면접용: 검증 파이프라인·경쟁 조건(TOCTOU)·IntegrityError 처리"
+    },
+    {
+      "day": 18,
+      "week": 4,
+      "file": "day-018.md",
+      "title": "커스텀 User·권한·세션: 로그인은 어디에 저장될까",
+      "track": "Goals 앱",
+      "cs": "면접용: AbstractUser vs AbstractBaseUser·객체 권한·세션 고정·세션 vs JWT"
     }
   ],
   "quizzes": [
