@@ -540,8 +540,32 @@ def day18():
         fr.append(im)
     save("day18-session.gif", fr, 1700)
 
+def day19():
+    fr = []
+    st = [("① is_staff·is_active?", "아니면 로그인 화면", WARN),
+          ("② has_view_permission", "없으면 메뉴 숨김", WARN),
+          ("③ get_queryset()", "내 목표만 filter", ACC),
+          ("④ 검색·필터 적용", "search_fields·list_filter", ACC),
+          ("⑤ list_display 렌더", "칸마다 속성/메서드", OK)]
+    caps = ["1. 직원 계정인지 확인", "2. 모델 보기 권한 확인",
+            "3. 보이는 행 자체를 줄이기", "4. 검색어·필터로 좁히기",
+            "5. 칸을 채워 표 그리기", "액션도 ②처럼 권한으로 노출 제한"]
+    for k, cap in enumerate(caps):
+        im, d = canvas("/admin/goals/goal/ 요청 흐름", cap)
+        for i, (t, sub, c) in enumerate(st):
+            y = 46 + i * 44
+            on = i <= k
+            box(d, 14, y, 226, 36, t, out=c if on else DIM,
+                tc=FG if on else DIM, f=FS)
+            if on:
+                d.text((250, y + 8), sub, font=FS, fill=c)
+            if i < 4:
+                arrow(d, 127, y + 36, 127, y + 44, c if i < k else DIM)
+        fr.append(im)
+    save("day19-admin.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

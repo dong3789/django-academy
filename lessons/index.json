@@ -143,6 +143,14 @@
       "title": "커스텀 User·권한·세션: 로그인은 어디에 저장될까",
       "track": "Goals 앱",
       "cs": "면접용: AbstractUser vs AbstractBaseUser·객체 권한·세션 고정·세션 vs JWT"
+    },
+    {
+      "day": 19,
+      "week": 4,
+      "file": "day-019.md",
+      "title": "Admin 커스터마이징: 목록·인라인·액션과 권한",
+      "track": "Goals 앱",
+      "cs": "면접용: Admin N+1(list_select_related)·raw_id/autocomplete·update()의 함정·Admin 보안"
     }
   ],
   "quizzes": [
@@ -155,6 +163,11 @@
       "week": 2,
       "file": "quiz-week-02.md",
       "title": "2주차 퀴즈 · Goals 앱 만들기 (Day 7~12)"
+    },
+    {
+      "week": 3,
+      "file": "quiz-week-03.md",
+      "title": "3주차 퀴즈 · Django 코어·Forms·인증·Admin (Day 13~19)"
     }
   ]
 }
