@@ -151,6 +151,14 @@
       "title": "Admin 커스터마이징: 목록·인라인·액션과 권한",
       "track": "Goals 앱",
       "cs": "면접용: Admin N+1(list_select_related)·raw_id/autocomplete·update()의 함정·Admin 보안"
+    },
+    {
+      "day": 20,
+      "week": 4,
+      "file": "day-020.md",
+      "title": "미들웨어·시그널: 모든 요청에 끼어들기, 그리고 언제 참을까",
+      "track": "Goals 앱",
+      "cs": "면접용: 미들웨어 순서·process_view·시그널의 숨은 제어 흐름·transaction.on_commit"
     }
   ],
   "quizzes": [

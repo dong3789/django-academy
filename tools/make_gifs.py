@@ -564,8 +564,33 @@ def day19():
         fr.append(im)
     save("day19-admin.gif", fr, 1600)
 
+def day20():
+    fr = []
+    layers = ["Timing", "Session", "Auth"]
+    seq = [(0, "in"), (1, "in"), (2, "in"), (3, "view"),
+           (2, "out"), (1, "out"), (0, "out")]
+    caps = ["1. Timing: 시작 시각 기록", "2. Session: 쿠키로 세션 찾기",
+            "3. Auth: request.user 붙이기", "4. 뷰 실행 → 응답 생성",
+            "5. Auth 나오는 길", "6. Session: 쿠키 저장",
+            "7. Timing: X-Elapsed-ms 헤더"]
+    for (k, way), cap in zip(seq, caps):
+        im, d = canvas("미들웨어 = 양파 껍질", cap)
+        cx, cy = 240, 150
+        for i, name in enumerate(layers):
+            r = 110 - i * 30
+            col = (OK if way == "out" else ACC) if i == k else DIM
+            d.ellipse((cx - r * 1.9, cy - r, cx + r * 1.9, cy + r),
+                      outline=col, width=3)
+            d.text((cx - r * 1.9 + 8, cy - 10), name, font=FS, fill=col)
+        vc = WARN if way == "view" else DIM
+        box(d, cx - 30, cy - 18, 60, 36, "뷰", out=vc, tc=FG if way == "view" else DIM, f=FS)
+        d.text((14, 40), "들어감 ↓" if way == "in" else ("나옴 ↑" if way == "out" else ""),
+               font=FS, fill=ACC if way == "in" else OK)
+        fr.append(im)
+    save("day20-onion.gif", fr, 1500)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
