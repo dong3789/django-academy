@@ -589,8 +589,31 @@ def day20():
         fr.append(im)
     save("day20-onion.gif", fr, 1500)
 
+def day21():
+    fr = []
+    st = [("JSON 입력", "{title, tags:[\"취미\"]}", DIM),
+          ("① 필드 검사", "타입·max_length", ACC),
+          ("② validate_title()", "공백 제거", ACC),
+          ("③ validate()", "deadline·clean", WARN),
+          ("save() → Goal", "DB 저장", OK),
+          (".data → JSON", "tags·checkins 펼침", OK)]
+    caps = ["1. 믿을 수 없는 입력이 들어옴", "2. 필드마다 타입·길이 검사",
+            "3. 필드별 규칙 (실패 시 ③ 생략)", "4. 여러 필드를 함께 검사",
+            "5. validated_data로 저장", "6. 응답은 중첩으로 펼쳐서"]
+    for k, cap in enumerate(caps):
+        im, d = canvas("Serializer: 들어오고 나가는 길", cap)
+        for i, (t, sub, c) in enumerate(st):
+            y = 42 + i * 37
+            on = i <= k
+            box(d, 14, y, 210, 30, t, out=c if on else DIM,
+                tc=FG if on else DIM, f=FS)
+            if on:
+                d.text((236, y + 5), sub, font=FS, fill=c)
+        fr.append(im)
+    save("day21-serializer.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

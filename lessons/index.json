@@ -159,6 +159,14 @@
       "title": "미들웨어·시그널: 모든 요청에 끼어들기, 그리고 언제 참을까",
       "track": "Goals 앱",
       "cs": "면접용: 미들웨어 순서·process_view·시그널의 숨은 제어 흐름·transaction.on_commit"
+    },
+    {
+      "day": 21,
+      "week": 5,
+      "file": "day-021.md",
+      "title": "DRF Serializer 심화: 중첩 응답과 검증",
+      "track": "Goals API",
+      "cs": "면접용: 중첩 쓰기·N+1·partial 검증·Mass Assignment·DRF가 clean()을 안 부르는 이유"
     }
   ],
   "quizzes": [
