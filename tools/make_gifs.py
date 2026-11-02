@@ -612,8 +612,32 @@ def day21():
         fr.append(im)
     save("day21-serializer.gif", fr, 1600)
 
+def day22():
+    fr = []
+    reqs = [("GET /goals/", "list"), ("POST /goals/", "create"),
+            ("GET /goals/1/", "retrieve"), ("PATCH /goals/1/", "partial_update"),
+            ("DELETE /goals/1/", "destroy"), ("POST /goals/1/checkin/", "checkin")]
+    caps = ["1. GET 목록 → list", "2. POST 목록 → create",
+            "3. GET 상세 → retrieve", "4. PATCH 상세 → partial_update",
+            "5. DELETE 상세 → destroy", "6. @action → checkin"]
+    for k, cap in enumerate(caps):
+        im, d = canvas("Router: URL → ViewSet 동작", cap)
+        box(d, 196, 112, 88, 40, "Router", out=ACC, tc=ACC, f=FS)
+        for i, (u, a) in enumerate(reqs):
+            y = 46 + i * 34
+            on = i == k
+            c = (WARN if i == 5 else ACC) if on else DIM
+            d.text((10, y + 4), u, font=FS, fill=FG if on else DIM)
+            box(d, 300, y, 170, 28, a, out=OK if on else DIM,
+                tc=FG if on else DIM, f=FS)
+            if on:
+                arrow(d, 160, y + 14, 196, 132, c)
+                arrow(d, 284, 132, 300, y + 14, OK)
+        fr.append(im)
+    save("day22-router.gif", fr, 1500)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
