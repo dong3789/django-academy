@@ -175,6 +175,14 @@
       "title": "APIView·ViewSet·Router: Goals API 열기",
       "track": "Goals API",
       "cs": "면접용: get_queryset과 IDOR·404 vs 403·믹스인 조합·@action과 get_object·ViewSet을 피할 때"
+    },
+    {
+      "day": 23,
+      "week": 5,
+      "file": "day-023.md",
+      "title": "인증: Session·Token·JWT로 \"누구세요?\" 답하기",
+      "track": "Goals API",
+      "cs": "면접용: 인증 vs 권한·CSRF·JWT 구조와 서명·폐기·블랙리스트·토큰 저장 위치·alg none"
     }
   ],
   "quizzes": [

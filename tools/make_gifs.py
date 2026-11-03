@@ -636,8 +636,41 @@ def day22():
         fr.append(im)
     save("day22-router.gif", fr, 1500)
 
+def day23():
+    fr = []
+    parts = [("헤더", "HS256"), ("페이로드", "user_id:7"),
+             ("서명", "HMAC(키)")]
+    caps = ["1. 토큰 = 헤더.페이로드.서명",
+            "2. 페이로드는 Base64 · 누구나 읽음",
+            "3. 서버가 비밀키로 서명을 다시 계산",
+            "4. 같으면 통과 → request.user",
+            "5. user_id:1로 위조 → 서명 불일치",
+            "6. 401 거부 · 키 없이는 못 만듦"]
+    for k, cap in enumerate(caps):
+        im, d = canvas("JWT: 서명으로 검증하기", cap)
+        bad = k >= 4
+        for i, (t, sub) in enumerate(parts):
+            x = 14 + i * 156
+            c = ACC if i < 2 else WARN
+            if i == 1 and bad:
+                sub, c = "user_id:1", WARN
+            box(d, x, 60, 140, 34, t, out=c, f=FS)
+            d.text((x + 8, 100), sub, font=FS,
+                   fill=FG if k >= 1 else DIM)
+        if k >= 2:
+            box(d, 14, 150, 296, 40, "서버: HMAC(헤더.페이로드, 키)",
+                out=ACC, f=FS)
+            arrow(d, 162, 125, 162, 148)
+        if k >= 3:
+            col = WARN if bad else OK
+            txt = "불일치 → 401" if bad else "일치 → 통과"
+            box(d, 330, 150, 136, 40, txt, out=col, tc=col, f=FS)
+            arrow(d, 310, 170, 328, 170, col)
+        fr.append(im)
+    save("day23-jwt.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
