@@ -183,6 +183,14 @@
       "title": "인증: Session·Token·JWT로 \"누구세요?\" 답하기",
       "track": "Goals API",
       "cs": "면접용: 인증 vs 권한·CSRF·JWT 구조와 서명·폐기·블랙리스트·토큰 저장 위치·alg none"
+    },
+    {
+      "day": 24,
+      "week": 5,
+      "track": "Goals API",
+      "file": "day-024.md",
+      "title": "권한·Throttling·Pagination·Filtering: 해도 돼? 그리고 얼마나?",
+      "cs": "면접용: 객체 권한과 목록 보안·401 vs 403·스로틀 공유 캐시·OFFSET vs Cursor·COUNT 비용"
     }
   ],
   "quizzes": [
@@ -200,6 +208,11 @@
       "week": 3,
       "file": "quiz-week-03.md",
       "title": "3주차 퀴즈 · Django 코어·Forms·인증·Admin (Day 13~19)"
+    },
+    {
+      "week": 4,
+      "file": "quiz-week-04.md",
+      "title": "4주차 퀴즈 · 미들웨어·DRF API (Day 20~24)"
     }
   ]
 }

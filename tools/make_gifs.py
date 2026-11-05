@@ -669,8 +669,43 @@ def day23():
         fr.append(im)
     save("day23-jwt.gif", fr, 1600)
 
+def day24():
+    fr = []
+    st = ["인증", "권한", "스로틀", "필터", "페이지"]
+    caps = ["1. 요청 도착 · 먼저 인증(누구?)",
+            "2. 권한: 해도 돼? 아니면 403",
+            "3. 스로틀: 너무 잦으면 429",
+            "4. 필터: 내 목표 중 조건에 맞는 것",
+            "5. 페이지: 20개씩 잘라서 응답",
+            "6. 200 OK · count/next/results"]
+    for k, cap in enumerate(caps):
+        im, d = canvas("DRF 요청 처리 순서", cap)
+        for i, t in enumerate(st):
+            x = 10 + i * 94
+            on = i == k
+            c = (OK if i < k or k == 5 else
+                 (ACC if on else DIM))
+            box(d, x, 100, 82, 46, t, out=c,
+                tc=FG if (on or i < k or k == 5)
+                else DIM, f=FS)
+            if i < 4:
+                arrow(d, x + 82, 123, x + 94, 123,
+                      OK if i < k else DIM)
+        errs = {1: "403 Forbidden", 2: "429 Too Many"}
+        if k in errs:
+            x = 10 + k * 94
+            arrow(d, x + 41, 148, x + 41, 190, WARN)
+            box(d, x - 20, 192, 122, 32, errs[k],
+                out=WARN, tc=WARN, f=FS)
+        if k == 5:
+            box(d, 110, 180, 260, 40,
+                "{count, next, results:[...]}",
+                out=OK, tc=OK, f=FS)
+        fr.append(im)
+    save("day24-pipeline.gif", fr, 1500)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
