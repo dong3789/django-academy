@@ -191,6 +191,14 @@
       "file": "day-024.md",
       "title": "권한·Throttling·Pagination·Filtering: 해도 돼? 그리고 얼마나?",
       "cs": "면접용: 객체 권한과 목록 보안·401 vs 403·스로틀 공유 캐시·OFFSET vs Cursor·COUNT 비용"
+    },
+    {
+      "day": 25,
+      "week": 5,
+      "file": "day-025.md",
+      "title": "API 버저닝·OpenAPI: 앱이 바뀌어도 옛 클라이언트가 안 깨지게",
+      "track": "Goals API",
+      "cs": "면접용: URL/헤더/쿼리 버저닝 트레이드오프·폐기 전략·OpenAPI docs-as-code·스키마 diff"
     }
   ],
   "quizzes": [

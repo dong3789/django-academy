@@ -704,8 +704,54 @@ def day24():
         fr.append(im)
     save("day24-pipeline.gif", fr, 1500)
 
+def day25():
+    fr = []
+    caps = ["1. v2에서 title → name 으로 바꿈",
+            "2. 버전 없이 옛 앱 → 필드 없음 · 깨짐",
+            "3. URL로 버전 나눔: /v1 · /v2",
+            "4. 옛 앱 → /api/v1/goals/ → title",
+            "5. 새 앱 → /api/v2/goals/ → name",
+            "6. 둘 다 200 · 계약이 버전마다 고정"]
+    for k, cap in enumerate(caps):
+        im, d = canvas("API 버저닝: 옛 클라 지키기", cap)
+        # clients
+        box(d, 14, 55, 100, 36, "옛 앱", out=ACC if k in (1, 3, 5) else DIM,
+            tc=FG if k in (1, 3, 5) else DIM, f=FS)
+        box(d, 14, 145, 100, 36, "새 앱", out=WARN if k in (0, 4, 5) else DIM,
+            tc=FG if k in (0, 4, 5) else DIM, f=FS)
+        if k == 0:
+            box(d, 160, 90, 280, 50, "breaking: title → name",
+                out=WARN, tc=WARN, f=FS)
+        elif k == 1:
+            arrow(d, 114, 73, 170, 100, WARN)
+            box(d, 170, 70, 160, 40, "/api/goals/", out=WARN, f=FS)
+            box(d, 350, 70, 116, 40, '{"name":…}', out=WARN, tc=WARN, f=FS)
+            d.text((170, 130), "옛 앱은 title 기대 → 깨짐", font=FS, fill=WARN)
+        elif k == 2:
+            box(d, 170, 55, 140, 40, "/api/v1/", out=ACC, f=FS)
+            box(d, 170, 145, 140, 40, "/api/v2/", out=WARN, f=FS)
+            d.text((330, 70), "옛 계약", font=FS, fill=ACC)
+            d.text((330, 160), "새 계약", font=FS, fill=WARN)
+        elif k == 3:
+            arrow(d, 114, 73, 170, 75, ACC)
+            box(d, 170, 55, 150, 40, "/api/v1/goals/", out=ACC, f=FS)
+            box(d, 340, 55, 126, 40, '{"title":…}', out=OK, tc=OK, f=FS)
+        elif k == 4:
+            arrow(d, 114, 163, 170, 165, WARN)
+            box(d, 170, 145, 150, 40, "/api/v2/goals/", out=WARN, f=FS)
+            box(d, 340, 145, 126, 40, '{"name":…}', out=OK, tc=OK, f=FS)
+        else:
+            arrow(d, 114, 73, 170, 75, ACC)
+            arrow(d, 114, 163, 170, 165, WARN)
+            box(d, 170, 55, 150, 40, "/api/v1/goals/", out=ACC, f=FS)
+            box(d, 340, 55, 126, 40, "200 title", out=OK, tc=OK, f=FS)
+            box(d, 170, 145, 150, 40, "/api/v2/goals/", out=WARN, f=FS)
+            box(d, 340, 145, 126, 40, "200 name", out=OK, tc=OK, f=FS)
+        fr.append(im)
+    save("day25-versioning.gif", fr, 1500)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
