@@ -750,8 +750,76 @@ def day25():
         fr.append(im)
     save("day25-versioning.gif", fr, 1500)
 
+
+def day26():
+    fr = []
+    caps = [
+        "1. Goals 목록 쿼리 1번",
+        "2. 루프에서 g.owner 접근…",
+        "3. 목표 20개 → 쿼리 21번!",
+        "4. FK는 JOIN 한 방",
+        "5. M2M·역FK는 IN 추가 1번",
+        "6. get_queryset에 미리 올리기",
+    ]
+    # 1
+    im, d = canvas("N+1 문제", caps[0])
+    box(d, 40, 70, 120, 40, "View", out=ACC)
+    box(d, 300, 70, 120, 40, "DB", out=DIM)
+    arrow(d, 160, 90, 295, 90, ACC)
+    box(d, 160, 140, 200, 40, "SELECT goals ×1", out=OK, tc=OK)
+    fr.append(im)
+    # 2
+    im, d = canvas("N+1 문제", caps[1])
+    box(d, 40, 70, 120, 40, "View", out=ACC)
+    box(d, 300, 70, 120, 40, "DB", out=WARN)
+    for i in range(3):
+        y = 130 + i * 36
+        arrow(d, 160, 90, 295, y + 15, WARN)
+        box(d, 300, y, 150, 28, f"SELECT user #{i+1}",
+            out=WARN, tc=WARN, f=FS)
+    fr.append(im)
+    # 3
+    im, d = canvas("N+1 문제", caps[2])
+    box(d, 90, 90, 300, 80, "1 + N = 21 queries",
+        out=WARN, tc=WARN, f=FT)
+    d.text((120, 190), "데이터가 늘수록 선형으로 느려짐",
+           font=FS, fill=WARN)
+    fr.append(im)
+    # 4
+    im, d = canvas("select_related", caps[3])
+    box(d, 40, 70, 120, 40, "View", out=ACC)
+    box(d, 300, 70, 120, 40, "DB", out=OK)
+    arrow(d, 160, 90, 295, 90, OK)
+    box(d, 100, 140, 280, 44, "SELECT goals JOIN users",
+        out=OK, tc=OK, f=FS)
+    d.text((130, 200), "owner 접근 → 추가 쿼리 0",
+           font=FS, fill=OK)
+    fr.append(im)
+    # 5
+    im, d = canvas("prefetch_related", caps[4])
+    box(d, 20, 60, 100, 36, "goals", out=ACC, f=FS)
+    box(d, 190, 60, 100, 36, "tags IN", out=OK, f=FS)
+    box(d, 360, 60, 100, 36, "checkins", out=OK, f=FS)
+    arrow(d, 120, 78, 185, 78, OK)
+    arrow(d, 290, 78, 355, 78, OK)
+    box(d, 80, 140, 320, 50, "총 쿼리 ≈ 3번", out=OK, tc=OK, f=FT)
+    d.text((90, 210), "파이썬에서 goal_id로 매칭",
+           font=FS, fill=DIM)
+    fr.append(im)
+    # 6
+    im, d = canvas("Goals API", caps[5])
+    box(d, 40, 70, 400, 50, 'select_related("owner")',
+        out=ACC, f=FS)
+    box(d, 40, 140, 400, 50,
+        'prefetch_related("tags","checkins")',
+        out=OK, f=FS)
+    d.text((100, 210), "중첩 응답도 가볍게", font=F, fill=OK)
+    fr.append(im)
+    save("day26-nplus1.gif", fr, 1450)
+
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

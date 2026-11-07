@@ -199,6 +199,14 @@
       "title": "API 버저닝·OpenAPI: 앱이 바뀌어도 옛 클라이언트가 안 깨지게",
       "track": "Goals API",
       "cs": "면접용: URL/헤더/쿼리 버저닝 트레이드오프·폐기 전략·OpenAPI docs-as-code·스키마 diff"
+    },
+    {
+      "day": 26,
+      "week": 6,
+      "file": "day-026.md",
+      "title": "N+1: select_related / prefetch_related",
+      "track": "ORM 최적화",
+      "cs": "면접용: JOIN 부풀림·Prefetch/to_attr·assertNumQueries·only/defer"
     }
   ],
   "quizzes": [
