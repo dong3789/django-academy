@@ -207,6 +207,14 @@
       "title": "N+1: select_related / prefetch_related",
       "track": "ORM 최적화",
       "cs": "면접용: JOIN 부풀림·Prefetch/to_attr·assertNumQueries·only/defer"
+    },
+    {
+      "day": 27,
+      "week": 6,
+      "file": "day-027.md",
+      "title": "인덱스와 EXPLAIN: 왜 이 쿼리가 느린지 읽는 법",
+      "track": "ORM 최적화",
+      "cs": "면접용: 인덱스 비용·선택도·leftmost prefix·커버링/부분 인덱스·EXPLAIN ANALYZE"
     }
   ],
   "quizzes": [
