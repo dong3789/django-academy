@@ -215,6 +215,14 @@
       "title": "인덱스와 EXPLAIN: 왜 이 쿼리가 느린지 읽는 법",
       "track": "ORM 최적화",
       "cs": "면접용: 인덱스 비용·선택도·leftmost prefix·커버링/부분 인덱스·EXPLAIN ANALYZE"
+    },
+    {
+      "day": 28,
+      "week": 6,
+      "file": "day-028.md",
+      "title": "트랜잭션·atomic·select_for_update: 함께 저장되거나 함께 취소되게",
+      "track": "ORM 최적화",
+      "cs": "면접용: ACID·WAL·SAVEPOINT·on_commit·비관적/낙관적 락·유니크 제약"
     }
   ],
   "quizzes": [

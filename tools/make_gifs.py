@@ -818,8 +818,42 @@ def day26():
     save("day26-nplus1.gif", fr, 1450)
 
 
+def day28():
+    fr = []
+    caps = [
+        "1. atomic 블록 시작 (BEGIN)",
+        "2. CheckIn INSERT 성공",
+        "3. streak UPDATE 중 에러!",
+        "4. ROLLBACK: 둘 다 없던 일",
+        "5. 둘 다 성공하면 COMMIT",
+    ]
+    def base(i, ci, up, end):
+        im, d = canvas("transaction.atomic()", caps[i])
+        d.rounded_rectangle((20, 50, 460, 250), 8,
+                            outline=ACC, width=2)
+        d.text((30, 56), "with transaction.atomic():",
+               font=FS, fill=ACC)
+        box(d, 40, 90, 180, 44, ci[0], out=ci[1], tc=ci[1], f=FS)
+        box(d, 260, 90, 180, 44, up[0], out=up[1], tc=up[1], f=FS)
+        if end:
+            box(d, 110, 170, 260, 50, end[0], out=end[1],
+                tc=end[1], f=FT)
+        return im
+    fr.append(base(0, ("CheckIn 저장", DIM),
+                   ("streak +1", DIM), ("BEGIN", ACC)))
+    fr.append(base(1, ("CheckIn 저장 ✓", OK),
+                   ("streak +1", DIM), None))
+    fr.append(base(2, ("CheckIn 저장 ✓", OK),
+                   ("streak +1 실패", WARN), ("예외 발생", WARN)))
+    fr.append(base(3, ("CheckIn 취소", WARN),
+                   ("streak 그대로", WARN), ("ROLLBACK", WARN)))
+    fr.append(base(4, ("CheckIn 저장 ✓", OK),
+                   ("streak +1 ✓", OK), ("COMMIT", OK)))
+    save("day28-atomic.gif", fr, 1500)
+
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
