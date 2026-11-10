@@ -851,9 +851,47 @@ def day28():
                    ("streak +1 ✓", OK), ("COMMIT", OK)))
     save("day28-atomic.gif", fr, 1500)
 
+def day29():
+    fr = []
+    caps = [
+        "1. 요청1이 Goal A를 잠금",
+        "2. 요청2가 Goal B를 잠금",
+        "3. 요청1은 B를, 요청2는 A를 기다림",
+        "4. 고리 발견! DB가 요청2를 롤백",
+        "5. 해결: 둘 다 id 순(A→B)으로 잠그기",
+    ]
+    def base(i):
+        im, d = canvas("데드락 (deadlock)", caps[i])
+        return im, d
+    def scene(i, a_out, b_out, w1=None, w2=None, t2=WARN):
+        im, d = base(i)
+        box(d, 30, 70, 110, 44, "요청 1", out=ACC, tc=ACC)
+        box(d, 30, 170, 110, 44, "요청 2", out=t2, tc=t2)
+        box(d, 330, 70, 120, 44, "Goal A", out=a_out, tc=a_out)
+        box(d, 330, 170, 120, 44, "Goal B", out=b_out, tc=b_out)
+        for (x1, y1, x2, y2, c) in (w1 or []) + (w2 or []):
+            arrow(d, x1, y1, x2, y2, c)
+        return im
+    fr.append(scene(0, ACC, DIM, [(140, 92, 325, 92, ACC)]))
+    fr.append(scene(1, ACC, WARN, [(140, 92, 325, 92, ACC)],
+                    [(140, 192, 325, 192, WARN)]))
+    fr.append(scene(2, ACC, WARN,
+                    [(140, 92, 325, 92, ACC),
+                     (140, 100, 325, 185, ACC)],
+                    [(140, 192, 325, 192, WARN),
+                     (140, 185, 325, 100, WARN)]))
+    fr.append(scene(3, ACC, ACC,
+                    [(140, 92, 325, 92, ACC),
+                     (140, 100, 325, 185, ACC)], None, DIM))
+    fr.append(scene(4, OK, OK,
+                    [(140, 92, 325, 92, OK),
+                     (140, 100, 325, 185, OK)],
+                    [(140, 185, 325, 100, DIM)], DIM))
+    save("day29-deadlock.gif", fr, 1600)
+
 
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

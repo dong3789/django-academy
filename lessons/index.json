@@ -223,6 +223,14 @@
       "title": "트랜잭션·atomic·select_for_update: 함께 저장되거나 함께 취소되게",
       "track": "ORM 최적화",
       "cs": "면접용: ACID·WAL·SAVEPOINT·on_commit·비관적/낙관적 락·유니크 제약"
+    },
+    {
+      "day": 29,
+      "week": 6,
+      "file": "day-029.md",
+      "title": "격리수준·락·데드락: 동시에 일하는 트랜잭션끼리의 규칙",
+      "track": "ORM 최적화",
+      "cs": "면접용: MVCC·DB별 기본 격리수준·SSI 재시도·write skew·gap lock·Coffman 4조건"
     }
   ],
   "quizzes": [
