@@ -66,6 +66,7 @@ function enhancePythonRun(){
         btn.textContent='실행 중…';
         await py.runPythonAsync('_out=_Cap(); sys.stdout=_out; sys.stderr=_out');
         try{
+          await py.loadPackagesFromImports(ta.value);
           await py.runPythonAsync(ta.value);
         }catch(e){
           const msg=String(e.message||e);

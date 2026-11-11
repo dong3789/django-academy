@@ -231,6 +231,14 @@
       "title": "격리수준·락·데드락: 동시에 일하는 트랜잭션끼리의 규칙",
       "track": "ORM 최적화",
       "cs": "면접용: MVCC·DB별 기본 격리수준·SSI 재시도·write skew·gap lock·Coffman 4조건"
+    },
+    {
+      "day": 30,
+      "week": 6,
+      "file": "day-030.md",
+      "title": "raw SQL·집계·bulk 연산: 많이, 빠르게, 안전하게",
+      "track": "ORM 최적화",
+      "cs": "면접용: annotate JOIN 부풀림·HAVING·bulk PK 반환·upsert·SQL 인젝션·식별자 화이트리스트"
     }
   ],
   "quizzes": [
