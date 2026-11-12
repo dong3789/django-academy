@@ -933,8 +933,37 @@ def day30():
     save("day30-bulk.gif", fr, 1500)
 
 
+def day31():
+    fr = []
+    caps = [
+        "1. test_a 시작: BEGIN (트랜잭션 열기)",
+        "2. Goal '독서' 생성 → count == 1 통과",
+        "3. test_a 끝: ROLLBACK → 흔적 없음",
+        "4. test_b 시작: 다시 빈 DB에서 출발",
+    ]
+    def scene(i, test, rows, state, col):
+        im, d = canvas("pytest-django 테스트 격리", caps[i])
+        box(d, 24, 70, 150, 44, test, out=ACC, tc=ACC)
+        box(d, 24, 140, 150, 40, state, out=col, tc=col, f=FS)
+        d.rounded_rectangle((260, 60, 456, 230), 8,
+                            outline=DIM, width=2, fill=BOX)
+        d.text((272, 66), "테스트 DB · goal", font=FS, fill=DIM)
+        for j, r in enumerate(rows):
+            box(d, 276, 100 + j * 44, 164, 36, r, out=OK, tc=OK,
+                f=FS)
+        if not rows:
+            d.text((318, 140), "(비어 있음)", font=FS, fill=DIM)
+        arrow(d, 174, 92, 255, 120, col)
+        return im
+    fr.append(scene(0, "test_a", [], "BEGIN", ACC))
+    fr.append(scene(1, "test_a", ["Goal: 독서"], "INSERT", OK))
+    fr.append(scene(2, "test_a", [], "ROLLBACK", WARN))
+    fr.append(scene(3, "test_b", [], "BEGIN", ACC))
+    save("day31-rollback.gif", fr, 1600)
+
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
