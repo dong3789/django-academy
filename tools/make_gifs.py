@@ -962,8 +962,43 @@ def day31():
     save("day31-rollback.gif", fr, 1600)
 
 
+def day32():
+    fr = []
+    caps = [
+        "1. test_my_goal(goal) — 인자 이름을 본다",
+        "2. goal fixture는 user가 필요 → user 먼저",
+        "3. user 만들고 → goal 만들기",
+        "4. 완성된 goal을 테스트 인자로 주입",
+        "5. 테스트 끝: yield 뒤 정리 → 롤백",
+    ]
+    def scene(i, on):
+        im, d = canvas("fixture 의존성 주입", caps[i])
+        def c(k):
+            return OK if k in on else DIM
+        box(d, 20, 60, 140, 40, "user", out=c("u"), tc=c("u"))
+        box(d, 20, 140, 140, 40, "goal(user)",
+            out=c("g"), tc=c("g"))
+        box(d, 270, 100, 190, 44, "test_my_goal(goal)",
+            out=ACC if "t" in on else DIM,
+            tc=ACC if "t" in on else DIM, f=FS)
+        if "a1" in on:
+            arrow(d, 90, 100, 90, 135, OK)
+        if "a2" in on:
+            arrow(d, 160, 160, 265, 125, OK)
+        if "x" in on:
+            box(d, 270, 175, 190, 36, "정리 · ROLLBACK",
+                out=WARN, tc=WARN, f=FS)
+        return im
+    fr.append(scene(0, {"t"}))
+    fr.append(scene(1, {"t", "a1"}))
+    fr.append(scene(2, {"t", "u", "g", "a1"}))
+    fr.append(scene(3, {"t", "u", "g", "a1", "a2"}))
+    fr.append(scene(4, {"t", "x"}))
+    save("day32-fixture.gif", fr, 1600)
+
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
