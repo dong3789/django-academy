@@ -255,6 +255,14 @@
    "title": "fixture·factory_boy: 테스트 준비물을 재사용하기",
    "track": "테스트",
    "cs": "면접용: fixture 실행·정리 순서(LIFO)·scope와 ScopeMismatch·autouse·build vs create·JSON fixture vs factory"
+  },
+  {
+   "day": 33,
+   "week": 7,
+   "file": "day-033.md",
+   "title": "API 테스트·모킹: 진짜 요청처럼, 가짜 외부 서비스로",
+   "track": "테스트",
+   "cs": "면접용: r.data vs r.json·force_authenticate vs credentials·401 vs 403·patch 위치·autospec·과한 모킹·on_commit 캡처"
   }
  ],
  "quizzes": [

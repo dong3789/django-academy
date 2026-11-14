@@ -997,8 +997,49 @@ def day32():
     save("day32-fixture.gif", fr, 1600)
 
 
+def day33():
+    fr = []
+    caps = [
+        "1. notify.send_push = 진짜 함수",
+        "2. views가 from-import → 이름표 하나 더",
+        "3. patch(notify.send_push): views는 그대로",
+        "4. patch(views.send_push): 쓰는 곳을 바꿈",
+        "5. 체크인 → 가짜 호출, 기록만 남음",
+    ]
+    def scene(i, vlink, nfake, vfake, call=False):
+        im, d = canvas("patch는 '쓰는 곳'을 바꾼다", caps[i])
+        box(d, 300, 110, 160, 46, "진짜 send_push",
+            out=WARN, tc=WARN)
+        box(d, 300, 190, 160, 40, "Mock (가짜)",
+            out=OK if (nfake or vfake) else DIM,
+            tc=OK if (nfake or vfake) else DIM)
+        box(d, 20, 70, 170, 40, "notify.send_push")
+        if vlink:
+            box(d, 20, 170, 170, 40, "views.send_push",
+                out=ACC, tc=ACC)
+        if nfake:
+            arrow(d, 190, 90, 295, 205, OK)
+        else:
+            arrow(d, 190, 90, 295, 125, WARN)
+        if vlink:
+            if vfake:
+                arrow(d, 190, 195, 295, 210, OK)
+            else:
+                arrow(d, 190, 185, 295, 140, WARN)
+        if call:
+            d.text((300, 238), "call_count = 1",
+                   font=FS, fill=OK)
+        return im
+    fr.append(scene(0, False, False, False))
+    fr.append(scene(1, True, False, False))
+    fr.append(scene(2, True, True, False))
+    fr.append(scene(3, True, False, True))
+    fr.append(scene(4, True, False, True, True))
+    save("day33-patch.gif", fr, 1700)
+
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
