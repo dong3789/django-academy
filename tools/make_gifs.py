@@ -1037,9 +1037,48 @@ def day33():
     fr.append(scene(4, True, False, True, True))
     save("day33-patch.gif", fr, 1700)
 
+def day34():
+    fr = []
+    steps = ["git push", "checkout", "pip install",
+             "pytest", "coverage"]
+    caps = [
+        "1. git push / PR 열기 → CI 시작",
+        "2. 빈 서버에 코드 받기",
+        "3. 의존성 설치 (requirements)",
+        "4. pytest — 테스트 전부 실행",
+        "5. 커버리지 80% 이상? → 초록불, 통과",
+        "6. 하나라도 실패 → 빨간불, 머지 금지",
+    ]
+    def scene(i, fail=False):
+        im, d = canvas("CI: push마다 자동 테스트", caps[i])
+        for j, s in enumerate(steps):
+            y = 50 + j * 40
+            if fail and j == 3:
+                o = WARN
+            elif fail and j == 4:
+                o = DIM
+            elif j < i or (j == i and i < 5):
+                o = OK if j < i else ACC
+            else:
+                o = OK if i == 4 and j == 4 else DIM
+            box(d, 20, y, 170, 32, s, out=o, tc=o, f=FS)
+            if j < 4:
+                arrow(d, 105, y + 32, 105, y + 38, DIM)
+        if i == 4:
+            box(d, 260, 110, 190, 60, "main 머지 OK",
+                out=OK, tc=OK)
+        if fail:
+            box(d, 260, 110, 190, 60, "머지 차단",
+                out=WARN, tc=WARN)
+        return im
+    for i in range(5):
+        fr.append(scene(i))
+    fr.append(scene(5, fail=True))
+    save("day34-ci.gif", fr, 1500)
+
 
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

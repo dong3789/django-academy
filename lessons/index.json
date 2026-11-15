@@ -263,6 +263,14 @@
    "title": "API 테스트·모킹: 진짜 요청처럼, 가짜 외부 서비스로",
    "track": "테스트",
    "cs": "면접용: r.data vs r.json·force_authenticate vs credentials·401 vs 403·patch 위치·autospec·과한 모킹·on_commit 캡처"
+  },
+  {
+   "day": 34,
+   "week": 7,
+   "file": "day-034.md",
+   "title": "통합테스트·커버리지·CI: 테스트가 알아서 돌게",
+   "track": "테스트",
+   "cs": "면접용: 테스트 피라미드·flaky test·브랜치 커버리지·100%의 함정·뮤테이션 테스트·CI Postgres·makemigrations --check·브랜치 보호"
   }
  ],
  "quizzes": [
