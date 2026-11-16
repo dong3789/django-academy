@@ -271,6 +271,14 @@
    "title": "통합테스트·커버리지·CI: 테스트가 알아서 돌게",
    "track": "테스트",
    "cs": "면접용: 테스트 피라미드·flaky test·브랜치 커버리지·100%의 함정·뮤테이션 테스트·CI Postgres·makemigrations --check·브랜치 보호"
+  },
+  {
+   "day": 35,
+   "week": 7,
+   "file": "day-035.md",
+   "title": "TDD 실습 + 코딩테스트 맛보기: 테스트 먼저 쓰기",
+   "track": "테스트",
+   "cs": "면접용: Red-Green-Refactor·의존성 주입과 시간 고정(freezegun)·localdate·최장 연속 수열 O(n)·분할 상환 분석·시간/공간 맞바꿈"
   }
  ],
  "quizzes": [

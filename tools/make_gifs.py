@@ -1077,8 +1077,38 @@ def day34():
     save("day34-ci.gif", fr, 1500)
 
 
+def day35():
+    fr = []
+    RED, BLUE = (248, 81, 73), ACC
+    st = [("Red", RED, "1. 실패하는 테스트를 먼저 쓴다",
+           "assert streak([], 17) == 0", "FAIL"),
+          ("Green", OK, "2. 통과할 만큼만 최소 구현",
+           "return 0", "PASS"),
+          ("Refactor", BLUE, "3. 초록 유지한 채 다듬기",
+           "set() 으로 빠르게", "PASS"),
+          ("Red", RED, "4. 다음 테스트 → 다시 빨강",
+           "assert streak([17], 17) == 1", "FAIL")]
+    pos = [(180, 50), (300, 150), (60, 150)]
+    for i, (name, col, cap, line, res) in enumerate(st):
+        im, d = canvas("TDD: Red → Green → Refactor", cap)
+        k = i % 3
+        for j, (nm, c) in enumerate([("Red", RED),
+                ("Green", OK), ("Refactor", BLUE)]):
+            x, y = pos[j]
+            on = j == k
+            box(d, x, y, 120, 44, nm, (40, 44, 52) if on else BOX,
+                c if on else DIM, c if on else DIM)
+        arrow(d, 300, 95, 340, 145, DIM)
+        arrow(d, 295, 172, 185, 172, DIM)
+        arrow(d, 110, 145, 175, 95, DIM)
+        d.text((60, 215), line, font=FS, fill=FG)
+        d.text((380, 215), res, font=F,
+               fill=OK if res == "PASS" else RED)
+        fr.append(im)
+    save("day35-tdd.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
