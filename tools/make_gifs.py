@@ -1107,8 +1107,41 @@ def day35():
         fr.append(im)
     save("day35-tdd.gif", fr, 1600)
 
+def day36():
+    fr = []
+    caps = ["1. 요청: stats:7 주세요",
+            "2. 캐시에 없음 → miss",
+            "3. DB에서 집계 (느림)",
+            "4. 결과를 캐시에 저장 (TTL 300초)",
+            "5. 다음 요청: 캐시에 있음 → hit!",
+            "6. 체크인 저장 → cache.delete → 다시 miss"]
+    for i, cap in enumerate(caps):
+        im, d = canvas("cache-aside: hit vs miss", cap)
+        box(d, 20, 110, 90, 50, "요청", out=ACC if i in (0, 4) else DIM)
+        c_out = WARN if i in (1, 5) else (OK if i in (3, 4) else DIM)
+        box(d, 190, 60, 110, 50, "Redis", out=c_out)
+        if i in (3, 4):
+            d.text((205, 118), "stats:7 = {..}", font=FS, fill=OK)
+        if i in (1, 5):
+            d.text((215, 118), "없음 (miss)", font=FS, fill=WARN)
+        box(d, 190, 175, 110, 50, "DB", out=WARN if i == 2 else DIM)
+        if i in (0, 4):
+            arrow(d, 110, 130, 185, 90)
+        if i == 2:
+            arrow(d, 110, 145, 185, 195, WARN)
+            d.text((320, 190), "집계 300ms", font=FS, fill=WARN)
+        if i == 3:
+            arrow(d, 245, 175, 245, 115, OK)
+        if i == 4:
+            d.text((320, 75), "응답 2ms", font=F, fill=OK)
+        if i == 5:
+            box(d, 330, 120, 130, 40, "CheckIn 저장", out=WARN, tc=WARN, f=FS)
+            arrow(d, 330, 130, 305, 100, WARN)
+        fr.append(im)
+    save("day36-cache.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

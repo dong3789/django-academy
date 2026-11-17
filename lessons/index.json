@@ -279,6 +279,14 @@
    "title": "TDD 실습 + 코딩테스트 맛보기: 테스트 먼저 쓰기",
    "track": "테스트",
    "cs": "면접용: Red-Green-Refactor·의존성 주입과 시간 고정(freezegun)·localdate·최장 연속 수열 O(n)·분할 상환 분석·시간/공간 맞바꿈"
+  },
+  {
+   "day": 36,
+   "week": 8,
+   "file": "day-036.md",
+   "title": "Redis·캐시 전략: 무거운 계산은 한 번만",
+   "track": "성능·인프라",
+   "cs": "면접용: cache-aside·write-through/back·TTL·on_commit 무효화·캐시 스탬피드·지터·관통·버전 키·cache_page 함정·Redis 원자성/LRU"
   }
  ],
  "quizzes": [
