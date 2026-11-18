@@ -1140,8 +1140,34 @@ def day36():
         fr.append(im)
     save("day36-cache.gif", fr, 1600)
 
+def day37():
+    fr = []
+    caps = ["1. 뷰: 체크인 저장 + delay(ci.id)",
+            "2. 메시지(JSON)가 Redis 큐에 쌓임",
+            "3. 뷰는 바로 응답 (빠름!)",
+            "4. 워커가 큐에서 꺼내 실행",
+            "5. 메일 발송 완료 → ack → 큐에서 삭제"]
+    for i, cap in enumerate(caps):
+        im, d = canvas("Celery: 뷰 → 브로커 → 워커", cap)
+        box(d, 14, 110, 100, 50, "Django 뷰", out=ACC if i in (0, 2) else DIM, f=FS)
+        box(d, 180, 100, 120, 70, "Redis", out=WARN if i in (1, 2) else DIM)
+        if i in (1, 2, 3):
+            box(d, 178, 178, 124, 30, "send_cheer(7)", out=WARN, tc=WARN, f=FS)
+        box(d, 360, 110, 100, 50, "워커", out=OK if i in (3, 4) else DIM)
+        if i in (0, 1):
+            arrow(d, 114, 135, 175, 135, ACC)
+        if i == 2:
+            d.text((20, 70), "응답 30ms", font=F, fill=OK)
+        if i == 3:
+            arrow(d, 300, 135, 355, 135, OK)
+        if i == 4:
+            d.text((350, 175), "메일 발송 ✓", font=FS, fill=OK)
+            d.text((200, 182), "큐 비었음", font=FS, fill=DIM)
+        fr.append(im)
+    save("day37-celery.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
