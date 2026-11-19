@@ -1166,8 +1166,27 @@ def day37():
         fr.append(im)
     save("day37-celery.gif", fr, 1600)
 
+def day38():
+    fr = []
+    steps = [("1차 실행", "실패 (SMTP 타임아웃)", 0, WARN),
+             ("1초 뒤 재시도", "또 실패", 1, WARN),
+             ("2초 뒤 재시도", "또 실패", 2, WARN),
+             ("4초 뒤 재시도", "성공! 메일 1통", 3, OK)]
+    for i, (lab, cap, k, col) in enumerate(steps):
+        im, d = canvas("재시도: 지수 백오프 + 지터", f"{i+1}. {lab} → {cap}")
+        d.line((30, 150, 450, 150), fill=DIM, width=2)
+        xs = [40, 120, 210, 380]
+        for j in range(k + 1):
+            c = OK if (j == 3 and k == 3) else WARN
+            box(d, xs[j] - 22, 125, 44, 50, "OK" if c == OK else "X", out=c, tc=c)
+            if j:
+                d.text(((xs[j-1] + xs[j]) / 2 - 14, 95), f"{2**(j-1)}s", font=F, fill=ACC)
+        d.text((30, 200), "대기 1s → 2s → 4s … (±지터)", font=FS, fill=DIM)
+        fr.append(im)
+    save("day38-retry.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
