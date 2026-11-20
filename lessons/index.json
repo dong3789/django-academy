@@ -303,6 +303,14 @@
       "title": "재시도·멱등성·beat: 실패해도, 두 번 돌아도, 정해진 시간에",
       "track": "성능·인프라",
       "cs": "면접용: 일시적 오류·지수 백오프·지터·thundering herd·max_retries 세는 법·멱등성·원자적 깃발(조건부 update/SET NX)·멱등 키·exactly-once 불가·아웃박스·beat 단일 실행·fan-out·expires"
+    },
+    {
+      "day": 39,
+      "week": 8,
+      "file": "day-039.md",
+      "title": "async views·Channels 개요: 기다림은 겹치고, 화면은 실시간으로",
+      "track": "성능·인프라",
+      "cs": "면접용: WSGI vs ASGI·이벤트 루프·gather/Promise.all·블로킹 함정·SynchronousOnlyOperation·async ORM(aget/async for)·sync_to_async/async_to_sync·thread_sensitive·동시성 vs 병렬성·WebSocket·consumer/group/channel layer·유실(at-most-once)·CSWSH·SSE/폴링"
     }
   ],
   "quizzes": [

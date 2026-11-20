@@ -1185,8 +1185,39 @@ def day38():
         fr.append(im)
     save("day38-retry.gif", fr, 1600)
 
+def day39():
+    fr = []
+    caps = ["1. 동기 뷰: API 3개를 하나씩 기다림",
+            "2. 동기 뷰: 1s + 1s + 1s = 3초",
+            "3. async 뷰: gather로 3개를 동시에 요청",
+            "4. async 뷰: 가장 느린 것만큼 = 1초"]
+    names = ["날씨", "명언", "잔디"]
+    for i, cap in enumerate(caps):
+        im, d = canvas("동기 vs async: 기다림을 겹치기", cap)
+        sync = i < 2
+        d.text((14, 50), "동기 (차례로)" if sync else "async (동시에)",
+               font=F, fill=WARN if sync else OK)
+        x0, unit = 90, 110
+        for j, n in enumerate(names):
+            y = 90 + j * 44
+            d.text((14, y + 6), n, font=FS, fill=FG)
+            x = x0 + (j * unit if sync else 0)
+            show = (i in (1, 3)) or j == 0 or not sync
+            if show:
+                col = WARN if sync else OK
+                box(d, x, y, unit - 6, 32, "1s", out=col, tc=col, f=FS)
+        d.line((x0, 228, x0 + 3 * unit, 228), fill=DIM, width=2)
+        for k in range(4):
+            d.text((x0 + k * unit - 6, 232), f"{k}s", font=FS, fill=DIM)
+        if i == 1:
+            d.text((300, 50), "총 3초", font=F, fill=WARN)
+        if i == 3:
+            d.text((300, 50), "총 1초", font=F, fill=OK)
+        fr.append(im)
+    save("day39-async.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
