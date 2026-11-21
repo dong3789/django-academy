@@ -1216,8 +1216,37 @@ def day39():
         fr.append(im)
     save("day39-async.gif", fr, 1600)
 
+def day40():
+    fr = []
+    caps = ["1. 마스터가 워커 3개를 fork",
+            "2. 요청 3개 → 놀고 있는 워커가 받음",
+            "3. 4번째 요청은 빈 워커를 기다림",
+            "4. 워커2가 timeout으로 죽음 (502)",
+            "5. 마스터가 새 워커를 즉시 fork"]
+    for i, cap in enumerate(caps):
+        im, d = canvas("gunicorn: 마스터 1 + 워커 N", cap)
+        box(d, 20, 120, 100, 50, "마스터", out=ACC)
+        for j in range(3):
+            y = 60 + j * 62
+            dead = i == 3 and j == 1
+            new = i == 4 and j == 1
+            busy = i in (1, 2) or (i >= 3 and j != 1)
+            col = WARN if dead else (OK if new else
+                  (ACC if busy else DIM))
+            lab = "죽음 X" if dead else (
+                "새 워커" if new else f"워커{j+1}")
+            box(d, 190, y, 110, 44, lab, out=col, tc=col if dead or new else FG, f=FS)
+            arrow(d, 120, 145, 185, y + 22, DIM)
+            if busy and not dead:
+                box(d, 330, y + 7, 70, 30, f"요청{j+1}", out=ACC, f=FS)
+        if i == 2:
+            box(d, 400, 60, 70, 30, "요청4", out=WARN, tc=WARN, f=FS)
+            d.text((404, 95), "대기 중…", font=FS, fill=WARN)
+        fr.append(im)
+    save("day40-workers.gif", fr, 1600)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

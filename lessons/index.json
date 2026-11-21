@@ -311,6 +311,14 @@
       "title": "async views·Channels 개요: 기다림은 겹치고, 화면은 실시간으로",
       "track": "성능·인프라",
       "cs": "면접용: WSGI vs ASGI·이벤트 루프·gather/Promise.all·블로킹 함정·SynchronousOnlyOperation·async ORM(aget/async for)·sync_to_async/async_to_sync·thread_sensitive·동시성 vs 병렬성·WebSocket·consumer/group/channel layer·유실(at-most-once)·CSWSH·SSE/폴링"
+    },
+    {
+      "day": 40,
+      "week": 9,
+      "file": "day-040.md",
+      "title": "WSGI/ASGI·gunicorn 워커: runserver를 졸업하는 날",
+      "track": "성능·인프라",
+      "cs": "면접용: PEP 3333·callable·environ/start_response·WSGI 미들웨어·ASGI scope/receive/send·pre-fork·마스터/워커·2×코어+1·메모리 상한·GIL·preload/copy-on-write·HUP 무중단·sync/gthread/gevent/uvicorn 워커·timeout→502·max_requests·slow client·DB 연결 수"
     }
   ],
   "quizzes": [
