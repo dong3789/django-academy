@@ -319,6 +319,14 @@
       "title": "WSGI/ASGI·gunicorn 워커: runserver를 졸업하는 날",
       "track": "성능·인프라",
       "cs": "면접용: PEP 3333·callable·environ/start_response·WSGI 미들웨어·ASGI scope/receive/send·pre-fork·마스터/워커·2×코어+1·메모리 상한·GIL·preload/copy-on-write·HUP 무중단·sync/gthread/gevent/uvicorn 워커·timeout→502·max_requests·slow client·DB 연결 수"
+    },
+    {
+      "day": 41,
+      "week": 9,
+      "file": "day-041.md",
+      "title": "nginx·정적 파일: gunicorn 앞에 문지기를 세우는 날",
+      "track": "성능·인프라",
+      "cs": "면접용: 리버스 프록시·slow client·요청/응답 버퍼링·이벤트 루프(epoll)·X-Forwarded-For/Proto/Host·SECURE_PROXY_SSL_HEADER·TLS 종료·502 vs 504·collectstatic·STATIC_ROOT·alias vs root·ManifestStaticFilesStorage·캐시 버스팅·immutable·WhiteNoise·MEDIA_ROOT·client_max_body_size(413)·X-Accel-Redirect·internal·업로드 XSS·presigned URL"
     }
   ],
   "quizzes": [

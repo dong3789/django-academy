@@ -1245,8 +1245,37 @@ def day40():
         fr.append(im)
     save("day40-workers.gif", fr, 1600)
 
+def day41():
+    fr = []
+    caps = ["1. 브라우저 요청은 먼저 nginx가 받음",
+            "2. /static/ → nginx가 디스크에서 바로",
+            "3. /goals/ → gunicorn으로 넘김(proxy)",
+            "4. 느린 폰: nginx가 다 받고서 넘김",
+            "5. 워커는 0.05초만 쓰고 바로 해방"]
+    for i, cap in enumerate(caps):
+        im, d = canvas("nginx: 앞문을 지키는 문지기", cap)
+        box(d, 14, 120, 80, 50, "브라우저", out=ACC, f=FS)
+        box(d, 160, 120, 90, 50, "nginx", out=OK, tc=OK)
+        box(d, 330, 60, 130, 44, "static/ 디스크", out=DIM, f=FS)
+        box(d, 330, 190, 130, 44, "gunicorn 워커", out=DIM, f=FS)
+        arrow(d, 94, 145, 155, 145, ACC if i == 0 else DIM)
+        if i == 1:
+            arrow(d, 250, 135, 325, 85, OK)
+            d.text((262, 100), "CSS", font=FS, fill=OK)
+        if i == 2:
+            arrow(d, 250, 155, 325, 210, ACC)
+        if i == 3:
+            d.text((20, 70), "3G… 10초 업로드", font=FS, fill=WARN)
+            d.text((165, 178), "버퍼에 쌓는 중", font=FS, fill=WARN)
+            d.text((340, 240), "워커는 대기 안 함", font=FS, fill=OK)
+        if i == 4:
+            arrow(d, 250, 155, 325, 210, OK)
+            d.text((300, 160), "완성된 요청만", font=FS, fill=OK)
+        fr.append(im)
+    save("day41-nginx.gif", fr, 1700)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
