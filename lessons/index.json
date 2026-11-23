@@ -327,6 +327,14 @@
       "title": "nginx·정적 파일: gunicorn 앞에 문지기를 세우는 날",
       "track": "성능·인프라",
       "cs": "면접용: 리버스 프록시·slow client·요청/응답 버퍼링·이벤트 루프(epoll)·X-Forwarded-For/Proto/Host·SECURE_PROXY_SSL_HEADER·TLS 종료·502 vs 504·collectstatic·STATIC_ROOT·alias vs root·ManifestStaticFilesStorage·캐시 버스팅·immutable·WhiteNoise·MEDIA_ROOT·client_max_body_size(413)·X-Accel-Redirect·internal·업로드 XSS·presigned URL"
+    },
+    {
+      "day": 42,
+      "week": 9,
+      "track": "성능·인프라",
+      "file": "day-042.md",
+      "title": "Docker·멀티스테이지·compose: Goals를 상자에 담는 날",
+      "cs": "면접용: 이미지 vs 컨테이너·레이어 캐시·줄 순서·.dockerignore·멀티스테이지·wheel·slim vs alpine(musl)·non-root USER·컨테이너 vs VM·namespace/cgroups·overlayfs·PID 1·exec form·SIGTERM·compose 네트워크·서비스 이름 DNS·depends_on vs healthcheck·named volume vs bind mount·migrate 일회성 작업·비밀값 주입·포트 노출"
     }
   ],
   "quizzes": [

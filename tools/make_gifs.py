@@ -1274,8 +1274,31 @@ def day41():
         fr.append(im)
     save("day41-nginx.gif", fr, 1700)
 
+def day42():
+    fr = []
+    layers = ["FROM python:3.12-slim", "COPY requirements.txt",
+              "RUN pip install", "COPY . .", "CMD gunicorn"]
+    caps = [("1. 첫 빌드: 모든 레이어를 새로 만듦", -1, "new"),
+            ("2. 다시 빌드: 바뀐 게 없으면 전부 캐시", 99, "hit"),
+            ("3. views.py 수정 → COPY . . 부터 다시", 3, "mix"),
+            ("4. pip install은 캐시 재사용 → 수 초", 3, "mix")]
+    for cap, ch, mode in caps:
+        im, d = canvas("레이어 캐시: 바뀐 줄부터 아래만", cap)
+        for i, l in enumerate(layers):
+            y = 220 - i * 36
+            if mode == "new":
+                out, tag = ACC, "새로"
+            elif i < ch:
+                out, tag = OK, "캐시"
+            else:
+                out, tag = WARN, "다시"
+            box(d, 30, y, 300, 30, l, out=out, f=FS)
+            d.text((345, y + 4), tag, font=FS, fill=out)
+        fr.append(im)
+    save("day42-layers.gif", fr, 1700)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41, day42)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
