@@ -1297,8 +1297,35 @@ def day42():
         fr.append(im)
     save("day42-layers.gif", fr, 1700)
 
+def day43():
+    fr = []
+    caps = [("1. 이미지 하나: 코드 + 의존성만", None),
+            ("2. 개발: DEBUG=True 주입 → 개발 컨테이너", "dev"),
+            ("3. 운영: DEBUG=False + 비밀키 주입", "prod"),
+            ("4. SECRET_KEY 없음 → 시작 즉시 실패", "fail")]
+    for cap, mode in caps:
+        im, d = canvas("같은 이미지, 다른 환경변수", cap)
+        box(d, 24, 110, 120, 60, "goals 이미지", out=ACC, f=FS)
+        if mode == "dev":
+            box(d, 190, 60, 120, 40, "DEBUG=True", out=OK, f=FS)
+            arrow(d, 144, 140, 330, 140, OK)
+            box(d, 335, 115, 125, 50, "개발 서버", out=OK, tc=OK, f=FS)
+        if mode == "prod":
+            box(d, 175, 50, 150, 30, "DEBUG=False", out=ACC, f=FS)
+            box(d, 175, 84, 150, 30, "SECRET_KEY=…", out=ACC, f=FS)
+            arrow(d, 144, 140, 330, 140, ACC)
+            box(d, 335, 115, 125, 50, "운영 서버", out=ACC, tc=ACC, f=FS)
+        if mode == "fail":
+            box(d, 175, 60, 150, 36, "SECRET_KEY ?", out=WARN, f=FS)
+            arrow(d, 144, 140, 330, 140, WARN)
+            box(d, 335, 115, 125, 50, "KeyError!", out=WARN, tc=WARN, f=FS)
+            d.text((300, 180), "조용히 잘못 뜨는 것보다", font=FS, fill=DIM)
+            d.text((300, 200), "바로 죽는 게 안전", font=FS, fill=OK)
+        fr.append(im)
+    save("day43-env.gif", fr, 1700)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41, day42)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41, day42, day43)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

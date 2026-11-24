@@ -335,6 +335,14 @@
       "file": "day-042.md",
       "title": "Docker·멀티스테이지·compose: Goals를 상자에 담는 날",
       "cs": "면접용: 이미지 vs 컨테이너·레이어 캐시·줄 순서·.dockerignore·멀티스테이지·wheel·slim vs alpine(musl)·non-root USER·컨테이너 vs VM·namespace/cgroups·overlayfs·PID 1·exec form·SIGTERM·compose 네트워크·서비스 이름 DNS·depends_on vs healthcheck·named volume vs bind mount·migrate 일회성 작업·비밀값 주입·포트 노출"
+    },
+    {
+      "day": 43,
+      "week": 9,
+      "track": "성능·인프라",
+      "file": "day-043.md",
+      "title": "환경변수·보안·로깅: Goals를 운영 모드로 바꾸는 날",
+      "cs": "면접용: 12-Factor 설정·환경변수 문자열 함정·fail fast·SECRET_KEY 용도·SECRET_KEY_FALLBACKS·secrets 파일 마운트·DEBUG 정보 노출·ALLOWED_HOSTS·Host 헤더/재설정 링크 중독·check --deploy·SECURE_SSL_REDIRECT·쿠키 Secure·HSTS·리다이렉트 루프·CSRF_TRUSTED_ORIGINS·nosniff·X-Frame-Options·CSP·로그 레벨·구조화 로그·stdout·LOGGING dictConfig·요청 ID·contextvars·PII 마스킹·Sentry·RED 지표·healthz·liveness vs readiness·증상 기반 알림·SLO"
     }
   ],
   "quizzes": [
