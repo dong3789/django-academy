@@ -1324,8 +1324,36 @@ def day43():
         fr.append(im)
     save("day43-env.gif", fr, 1700)
 
+def day44():
+    fr = []
+    # (캡션, 머신1, 머신2, DB 상태)
+    st = [("1. 지금: v1 두 대가 트래픽을 받음",
+           ("v1", OK), ("v1", OK), ("DB", DIM)),
+          ("2. release: migrate 먼저, v1은 계속 서빙",
+           ("v1", OK), ("v1", OK), ("migrate", ACC)),
+          ("3. v2 한 대 기동 → /healthz 대기",
+           ("v2 검사중", WARN), ("v1", OK), ("DB", DIM)),
+          ("4. 통과하면 투입, 다음 대 교체",
+           ("v2", ACC), ("v2 검사중", WARN), ("DB", DIM)),
+          ("5. 둘 다 v2: 끊김 없이 교체 끝",
+           ("v2", ACC), ("v2", ACC), ("DB", DIM)),
+          ("실패하면? 교체 중단, v1이 계속 서빙",
+           ("v2 실패", WARN), ("v1", OK), ("DB", DIM))]
+    for cap, m1, m2, db in st:
+        im, d = canvas("롤링 배포: 검사 통과한 것만 투입", cap)
+        box(d, 18, 110, 92, 50, "LB", out=ACC, f=FS)
+        for (t, c), y in ((m1, 60), (m2, 160)):
+            box(d, 190, y, 130, 50, t, out=c, tc=c, f=FS)
+            live = c != WARN
+            arrow(d, 110, 135, 186, y + 25,
+                  OK if live else DIM)
+            arrow(d, 320, y + 25, 372, 135, DIM)
+        box(d, 376, 110, 90, 50, db[0], out=db[1], f=FS)
+        fr.append(im)
+    save("day44-rolling.gif", fr, 1700)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41, day42, day43)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41, day42, day43, day44)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

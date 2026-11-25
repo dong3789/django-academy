@@ -343,6 +343,14 @@
       "file": "day-043.md",
       "title": "환경변수·보안·로깅: Goals를 운영 모드로 바꾸는 날",
       "cs": "면접용: 12-Factor 설정·환경변수 문자열 함정·fail fast·SECRET_KEY 용도·SECRET_KEY_FALLBACKS·secrets 파일 마운트·DEBUG 정보 노출·ALLOWED_HOSTS·Host 헤더/재설정 링크 중독·check --deploy·SECURE_SSL_REDIRECT·쿠키 Secure·HSTS·리다이렉트 루프·CSRF_TRUSTED_ORIGINS·nosniff·X-Frame-Options·CSP·로그 레벨·구조화 로그·stdout·LOGGING dictConfig·요청 ID·contextvars·PII 마스킹·Sentry·RED 지표·healthz·liveness vs readiness·증상 기반 알림·SLO"
+    },
+    {
+      "day": 44,
+      "week": 9,
+      "track": "성능·인프라",
+      "file": "day-044.md",
+      "title": "클라우드 배포: Goals를 인터넷에 올리는 날",
+      "cs": "면접용: IaaS vs PaaS vs 컨테이너 서비스·0.0.0.0 바인딩·fly.toml·secrets·DATABASE_URL·CONN_MAX_AGE·연결 수 한계·PgBouncer·CONN_HEALTH_CHECKS·release 단계 migrate·동시 migrate 금지·두 버전 공존·expand/contract·AddIndexConcurrently·lock_timeout·DNS CNAME·Let's Encrypt·헬스체크 grace_period·롤링/블루그린/카나리·롤백(불변 이미지)·graceful shutdown·Cloudflare Flexible 리다이렉트 루프·L4 vs L7 헬스체크·AWS 구성(ALB·ECS Fargate·RDS·S3·Secrets Manager)"
     }
   ],
   "quizzes": [
