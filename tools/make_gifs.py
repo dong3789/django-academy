@@ -1352,8 +1352,45 @@ def day44():
         fr.append(im)
     save("day44-rolling.gif", fr, 1700)
 
+def day45():
+    fr = []
+    # (캡션, 보일 상자들, 강조 상자, 화살표들)
+    U, G = (18, 60, 120, 44), (342, 60, 120, 44)
+    M, C = (180, 60, 120, 44), (180, 180, 120, 44)
+    st = [("v1: 주인 한 명, 체크인은 목표에만",
+           ["U", "G", "C"], None, [("U", "G"), ("G", "C")]),
+          ("요구사항: 친구와 함께 → 누가 체크인?",
+           ["U", "G", "C"], "C", [("U", "G"), ("G", "C")]),
+          ("관계에 역할·가입일 → 엔티티로 승격",
+           ["U", "G", "M", "C"], "M",
+           [("U", "M"), ("G", "M"), ("G", "C")]),
+          ("체크인에도 user FK: 누가 했는지",
+           ["U", "G", "M", "C"], "C",
+           [("U", "M"), ("G", "M"), ("G", "C"), ("U", "C")]),
+          ("제약: (goal,user) 1번, (goal,user,day) 1번",
+           ["U", "G", "M", "C"], "ALL",
+           [("U", "M"), ("G", "M"), ("G", "C"), ("U", "C")])]
+    pos = {"U": U, "G": G, "M": M, "C": C}
+    name = {"U": "User", "G": "Goal",
+            "M": "GoalMember", "C": "CheckIn"}
+    def mid(k):
+        x, y, w, h = pos[k]
+        return x + w / 2, y + h / 2
+    for cap, shown, hi, arrows in st:
+        im, d = canvas("ERD 재설계: 요구사항이 모양을 바꾼다", cap)
+        for a, b in arrows:
+            (x1, y1), (x2, y2) = mid(a), mid(b)
+            d.line((x1, y1, x2, y2), fill=DIM, width=3)
+            d.ellipse((x2 - 5, y2 - 5, x2 + 5, y2 + 5), fill=DIM)
+        for k in shown:
+            x, y, w, h = pos[k]
+            c = OK if hi == "ALL" else (WARN if hi == k else ACC)
+            box(d, x, y, w, h, name[k], out=c, f=FS)
+        fr.append(im)
+    save("day45-erd.gif", fr, 1800)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41, day42, day43, day44)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41, day42, day43, day44, day45)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()

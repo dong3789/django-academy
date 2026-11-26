@@ -351,6 +351,14 @@
       "file": "day-044.md",
       "title": "클라우드 배포: Goals를 인터넷에 올리는 날",
       "cs": "면접용: IaaS vs PaaS vs 컨테이너 서비스·0.0.0.0 바인딩·fly.toml·secrets·DATABASE_URL·CONN_MAX_AGE·연결 수 한계·PgBouncer·CONN_HEALTH_CHECKS·release 단계 migrate·동시 migrate 금지·두 버전 공존·expand/contract·AddIndexConcurrently·lock_timeout·DNS CNAME·Let's Encrypt·헬스체크 grace_period·롤링/블루그린/카나리·롤백(불변 이미지)·graceful shutdown·Cloudflare Flexible 리다이렉트 루프·L4 vs L7 헬스체크·AWS 구성(ALB·ECS Fargate·RDS·S3·Secrets Manager)"
+    },
+    {
+      "day": 45,
+      "week": 10,
+      "track": "포트폴리오",
+      "file": "day-045.md",
+      "title": "요구사항·ERD 재설계: Goals 설계도를 다시 그리는 날",
+      "cs": "면접용: 유저 스토리→엔티티·기능/비기능 요구사항·Crow's foot 카디널리티·사용자 시간대 날짜(시각은 UTC)·관계 승격(through 모델)·UniqueConstraint로 중복 방지·부분 유일 인덱스(owner 1명)·복합 PK vs 대리 키·정수 id vs UUIDv4/v7·열거 공격·정규화 1NF~BCNF·갱신 이상·비정규화 조건·F() 원자 갱신·CheckConstraint·on_delete CASCADE/PROTECT/SET_NULL·소프트 삭제 함정·filter 후 annotate JOIN 재사용·1:N→N:M 무중단 마이그레이션·apps.get_model"
     }
   ],
   "quizzes": [
@@ -383,6 +391,11 @@
       "week": 6,
       "file": "quiz-week-06.md",
       "title": "6주차 퀴즈 · 테스트·캐시·Celery (Day 32~38)"
+    },
+    {
+      "week": 7,
+      "file": "quiz-week-07.md",
+      "title": "7주차 퀴즈 · async·배포·ERD 설계 (Day 39~45)"
     }
   ],
   "exams": [
