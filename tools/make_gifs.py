@@ -1389,8 +1389,37 @@ def day45():
         fr.append(im)
     save("day45-erd.gif", fr, 1800)
 
+def day46():
+    fr = []
+    T = "권한 두 겹: 요청이 통과하는 길"
+    steps = ["인증", "get_queryset", "object 권한", "응답"]
+    xs = [14, 128, 252, 376]
+    st = [("GET /goals/ 목록 (나)", 3, None, "내 목표만 200"),
+          ("GET /goals/2/ 남의 목표", 1, 1, "범위 밖 → 404"),
+          ("PATCH /goals/7/ 멤버", 2, 2, "방장 아님 → 403"),
+          ("PATCH /goals/7/ 방장", 3, None, "수정 200"),
+          ("POST 체크인: object 권한 없음", 1, None,
+           "범위 queryset에서 목표 다시 찾기")]
+    for cap, reach, fail, res in st:
+        im, d = canvas(T, cap)
+        for i, (x, s) in enumerate(zip(xs, steps)):
+            if fail is not None and i == fail:
+                c = WARN
+            elif i <= reach and (fail is None or i < fail):
+                c = OK
+            else:
+                c = DIM
+            box(d, x, 90, 100, 50, s, out=c, f=FS)
+            if i < 3:
+                arrow(d, x + 102, 115, x + 112, 115, DIM)
+        col = WARN if fail is not None else OK
+        tw = d.textlength(res, font=F)
+        d.text(((W - tw) / 2, 180), res, font=F, fill=col)
+        fr.append(im)
+    save("day46-perm.gif", fr, 1800)
+
 import sys
 FNS = {f.__name__: f for f in
-       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41, day42, day43, day44, day45)}
+       (day1, day2_list, day2_hash, day3, day4, day5, day6, day7, day8, day9, day10, day11, day12, day13, day14, day15, day16, day17, day18, day19, day20, day21, day22, day23, day24, day25, day26, day28, day29, day30, day31, day32, day33, day34, day35, day36, day37, day38, day39, day40, day41, day42, day43, day44, day45, day46)}
 for name in (sys.argv[1:] or FNS):
     FNS[name]()
